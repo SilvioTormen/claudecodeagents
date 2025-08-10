@@ -1,32 +1,50 @@
-# Claude Code AI Agents Collection
+# Claude Code AI Agents Collection v3.0
 
-A comprehensive collection of specialized AI agents for Claude Code, organized by categories. Each agent is an expert in their domain and can work independently or as part of a coordinated team.
+Eine umfassende Sammlung spezialisierter AI-Agenten für Claude Code - organisiert nach Kategorien für maximale Produktivität. Jeder Agent ist ein Experte in seinem Bereich und kann eigenständig oder als Teil eines koordinierten Teams arbeiten.
 
-## 🚀 Quick Installation
+## 🚀 Schnellinstallation
 
-### One-Line Install (Generic Team)
+### Automatische Installation mit setup-claude-agents.sh (Empfohlen)
 ```bash
-curl -fsSL https://raw.githubusercontent.com/SilvioTormen/claudecodeagents/main/import-agents.sh | bash -s -- --install
+# Vollständige Installation mit allen Agenten
+curl -fsSL https://raw.githubusercontent.com/SilvioTormen/claudecodeagents/main/setup-claude-agents.sh | bash
+
+# Oder direkt ausführen nach dem Klonen
+git clone https://github.com/SilvioTormen/claudecodeagents.git
+cd claudecodeagents
+./setup-claude-agents.sh
 ```
 
-### Install Specific Category
+### Alternative: Kategorie-basierte Installation
 ```bash
-# Install framework specialists
+# Generisches Entwicklungsteam installieren
+curl -fsSL https://raw.githubusercontent.com/SilvioTormen/claudecodeagents/main/import-agents.sh | bash -s -- --install
+
+# Framework-Spezialisten installieren
 curl -fsSL https://raw.githubusercontent.com/SilvioTormen/claudecodeagents/main/import-agents.sh | bash -s -- --install frameworks
 
-# Install data science team
+# Data Science Team installieren
 curl -fsSL https://raw.githubusercontent.com/SilvioTormen/claudecodeagents/main/import-agents.sh | bash -s -- --install data-science
 ```
 
-### Interactive Installation
+### Interaktive Installation
 ```bash
 curl -fsSL https://raw.githubusercontent.com/SilvioTormen/claudecodeagents/main/import-agents.sh | bash
 ```
 
-## 📦 Agent Categories
+## ✨ Features
 
-### Generic (Software Development Team)
-Complete software development team for most projects:
+- **20+ spezialisierte Agenten** für verschiedene Entwicklungsbereiche
+- **Automatische Installation** mit einem einzigen Befehl
+- **Team-Koordination** durch den Context Manager
+- **Kategorisierte Organisation** für einfache Verwaltung
+- **Anpassbare Agenten** mit Template-System
+- **Regelmäßige Updates** verfügbar
+
+## 📦 Agenten-Kategorien
+
+### Generic (Software-Entwicklungsteam)
+Komplettes Software-Entwicklungsteam für die meisten Projekte:
 - **@context-manager** - Project coordination and context management
 - **@solution-architect** - System design and architecture
 - **@backend-developer** - Server-side development
@@ -116,57 +134,78 @@ Domain-specific specialists:
 @game-developer implement multiplayer networking with client prediction
 ```
 
-## 🛠 Advanced Features
+## 🛠 Erweiterte Funktionen
 
-### Create Custom Agents
+### Setup-Skript Optionen (setup-claude-agents.sh)
 ```bash
-# Interactive agent creation
-./import-agents.sh --create
+# Vollständige Installation mit allen Funktionen
+./setup-claude-agents.sh
 
-# Using template
-cp templates/agent-template.md agents/custom/my-agent.md
-# Edit the file to customize
+# Nur spezifische Agenten installieren
+./setup-claude-agents.sh --agents "backend-developer,frontend-developer"
+
+# Mit GitHub Integration
+./setup-claude-agents.sh --github
+
+# Backup erstellen vor Installation
+./setup-claude-agents.sh --backup
 ```
 
-### Manage Agents
+### Eigene Agenten erstellen
 ```bash
-# List installed agents
+# Interaktive Agenten-Erstellung
+./import-agents.sh --create
+
+# Mit Template
+cp templates/agent-template.md agents/custom/my-agent.md
+# Datei bearbeiten und anpassen
+```
+
+### Agenten verwalten
+```bash
+# Installierte Agenten anzeigen
 ./import-agents.sh --list
 
-# Update all agents
+# Alle Agenten aktualisieren
 ./import-agents.sh --update
 
-# Backup agents
+# Backup erstellen
 ./import-agents.sh --backup
 
-# Install all categories
+# Alle Kategorien installieren
 ./import-agents.sh --all
 ```
 
-## 📁 Repository Structure
+## 📁 Repository-Struktur
 ```
 claudecodeagents/
-├── import-agents.sh              # Main installation script
-├── README.md                     # This file
-├── agents/                       # Agent definitions by category
-│   ├── generic/                  # General development team
+├── setup-claude-agents.sh       # Haupt-Installationsskript (v3.0)
+├── import-agents.sh              # Kategorie-basierte Installation
+├── README.md                     # Diese Datei
+├── push-to-github.sh            # GitHub Upload Helfer
+├── agents/                       # Agenten-Definitionen nach Kategorie
+│   ├── generic/                  # Allgemeines Entwicklungsteam
 │   │   ├── manifest.json
 │   │   ├── context-manager.md
 │   │   ├── backend-developer.md
 │   │   └── ...
-│   ├── frameworks/               # Framework specialists
+│   ├── frameworks/               # Framework-Spezialisten
 │   │   ├── manifest.json
 │   │   ├── react-specialist.md
 │   │   └── ...
-│   ├── data-science/            # Data & ML agents
-│   ├── mobile/                  # Mobile development
-│   ├── gaming/                  # Game development
-│   ├── devops/                  # DevOps specialists
-│   ├── industry/                # Industry-specific
-│   └── specialized/             # Other specialists
-└── templates/                    # Templates for new agents
-    ├── agent-template.md
-    └── create-agent.sh
+│   ├── data-science/            # Data & ML Agenten
+│   ├── mobile/                  # Mobile Entwicklung
+│   ├── gaming/                  # Spieleentwicklung
+│   ├── devops/                  # DevOps Spezialisten
+│   ├── industry/                # Branchenspezifisch
+│   └── specialized/             # Weitere Spezialisten
+├── templates/                    # Vorlagen für neue Agenten
+│   ├── agent-template.md
+│   └── create-agent.sh
+└── .claude/                      # Claude Code Konfiguration
+    ├── CLAUDE.md                # Projekt-Kontext
+    ├── agents/                  # Installierte Agenten
+    └── agent-registry.json      # Agenten-Registry
 ```
 
 ## 🔧 Creating Your Own Agents
@@ -219,11 +258,12 @@ Main agent instructions and personality...
 4. Update import script categories
 5. Update documentation
 
-## 📋 Installation Requirements
-- **Claude Code CLI** installed
-- **curl** or **wget** for downloading
-- **bash** shell
-- Write permissions to `~/.config/claude/agents/`
+## 📋 Systemanforderungen
+- **Claude Code CLI** installiert
+- **curl** oder **wget** für Downloads
+- **bash** Shell
+- Schreibrechte für `~/.config/claude/agents/`
+- **Git** (optional, für Repository-Klonen)
 
 ## 🔄 Updating
 
