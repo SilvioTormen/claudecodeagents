@@ -1,206 +1,275 @@
-# Claude Code Software Development Team Agents
+# Claude Code AI Agents Collection
 
-A complete set of specialized AI agents for Claude Code that work together as a software development team. These agents cover all aspects of modern software development from architecture to deployment.
+A comprehensive collection of specialized AI agents for Claude Code, organized by categories. Each agent is an expert in their domain and can work independently or as part of a coordinated team.
 
 ## 🚀 Quick Installation
 
-### One-Line Install (Recommended)
-
+### One-Line Install (Generic Team)
 ```bash
 curl -fsSL https://raw.githubusercontent.com/SilvioTormen/claudecodeagents/main/import-agents.sh | bash -s -- --install
 ```
 
-Or with wget:
-
+### Install Specific Category
 ```bash
-wget -qO- https://raw.githubusercontent.com/SilvioTormen/claudecodeagents/main/import-agents.sh | bash -s -- --install
-```
+# Install framework specialists
+curl -fsSL https://raw.githubusercontent.com/SilvioTormen/claudecodeagents/main/import-agents.sh | bash -s -- --install frameworks
 
-### Manual Installation
-
-1. Clone the repository:
-```bash
-git clone https://github.com/SilvioTormen/claudecodeagents.git
-cd claudecodeagents
-```
-
-2. Run the import script:
-```bash
-./import-agents.sh --install
+# Install data science team
+curl -fsSL https://raw.githubusercontent.com/SilvioTormen/claudecodeagents/main/import-agents.sh | bash -s -- --install data-science
 ```
 
 ### Interactive Installation
-
-For a guided installation with menu options:
-
 ```bash
 curl -fsSL https://raw.githubusercontent.com/SilvioTormen/claudecodeagents/main/import-agents.sh | bash
 ```
 
-## 📦 Available Agents
+## 📦 Agent Categories
 
-| Agent | Role | Specialization |
-|-------|------|----------------|
-| **@context-manager** | Team Lead | Project coordination, context management, and team orchestration |
-| **@solution-architect** | Architect | System design, technology selection, and architecture decisions |
-| **@backend-developer** | Backend Dev | Server-side development, APIs, databases, and integrations |
-| **@frontend-developer** | Frontend Dev | User interfaces, UX, responsive design, and client-side logic |
-| **@devops-engineer** | DevOps | CI/CD, infrastructure, deployment, and monitoring |
-| **@quality-engineer** | QA Engineer | Testing strategies, test automation, and quality assurance |
-| **@security-engineer** | Security | Security architecture, vulnerability assessment, and compliance |
-| **@documentation-manager** | Tech Writer | Documentation, guides, API docs, and knowledge management |
+### Generic (Software Development Team)
+Complete software development team for most projects:
+- **@context-manager** - Project coordination and context management
+- **@solution-architect** - System design and architecture
+- **@backend-developer** - Server-side development
+- **@frontend-developer** - Client-side development
+- **@devops-engineer** - Infrastructure and deployment
+- **@quality-engineer** - Testing and QA
+- **@security-engineer** - Security and compliance
+- **@documentation-manager** - Documentation and guides
+
+### Frameworks
+Framework-specific specialists:
+- **@react-specialist** - React and React ecosystem
+- **@vue-specialist** - Vue.js and Nuxt
+- **@angular-specialist** - Angular framework
+- **@django-specialist** - Django (Python)
+- **@rails-specialist** - Ruby on Rails
+- **@spring-specialist** - Spring Boot (Java)
+
+### Data Science
+Data and ML specialists:
+- **@data-analyst** - Data analysis and visualization
+- **@ml-engineer** - Machine learning and deep learning
+- **@data-engineer** - Data pipelines and ETL
+- **@visualization-specialist** - Data visualization and dashboards
+
+### Mobile Development
+Mobile app specialists:
+- **@ios-developer** - Native iOS (Swift)
+- **@android-developer** - Native Android (Kotlin)
+- **@react-native-developer** - React Native
+- **@flutter-developer** - Flutter framework
+
+### Gaming
+Game development specialists:
+- **@game-developer** - Unity/Unreal game development
+- **@game-designer** - Game mechanics and design
+- **@graphics-programmer** - Shaders and rendering
+
+### DevOps & Infrastructure
+Specialized DevOps agents:
+- **@kubernetes-specialist** - K8s orchestration
+- **@aws-architect** - AWS cloud services
+- **@azure-architect** - Azure cloud services
+- **@terraform-specialist** - Infrastructure as Code
+
+### Industry Specific
+Domain-specific specialists:
+- **@fintech-developer** - Financial technology
+- **@healthcare-developer** - Healthcare/HIPAA compliance
+- **@ecommerce-specialist** - E-commerce platforms
+- **@blockchain-developer** - Web3 and blockchain
 
 ## 💡 Usage Examples
 
-### Starting a New Project
-
+### Basic Usage
 ```bash
-@context-manager help me set up a new e-commerce platform with microservices architecture
+# Single agent
+@react-specialist optimize my React components for performance
+
+# Team coordination
+@context-manager set up a new e-commerce project with React and Node.js
 ```
 
-The context-manager will automatically coordinate with other team members to:
-- Design the system architecture (@solution-architect)
-- Set up backend services (@backend-developer)
-- Create the user interface (@frontend-developer)
-- Configure CI/CD pipelines (@devops-engineer)
-- Implement testing strategies (@quality-engineer)
-- Ensure security best practices (@security-engineer)
-- Create comprehensive documentation (@documentation-manager)
+### Category-Specific Examples
 
-### Working with Specific Agents
-
+#### Web Development
 ```bash
-# Architecture design
-@solution-architect design a scalable REST API architecture
-
-# Backend development
-@backend-developer implement user authentication with JWT
-
-# Frontend development
-@frontend-developer create a responsive dashboard with real-time updates
-
-# DevOps tasks
-@devops-engineer set up GitHub Actions CI/CD pipeline
-
-# Testing
-@quality-engineer create comprehensive test suite for the API
-
-# Security
-@security-engineer perform security audit and implement OWASP best practices
-
-# Documentation
-@documentation-manager create API documentation with examples
+@react-specialist implement infinite scrolling with virtualization
+@vue-specialist convert Options API components to Composition API
+@backend-developer create RESTful API with JWT authentication
 ```
 
-## 🔧 Script Options
-
-The import script supports multiple options:
-
+#### Data Science
 ```bash
-# Install all agents
-./import-agents.sh --install
+@ml-engineer build a recommendation system using collaborative filtering
+@data-analyst analyze user retention and create cohort analysis
+```
 
-# Update existing agents
-./import-agents.sh --update
+#### Mobile Development
+```bash
+@ios-developer implement push notifications with deep linking
+@android-developer optimize app for battery consumption
+```
 
+#### Gaming
+```bash
+@game-developer implement multiplayer networking with client prediction
+```
+
+## 🛠 Advanced Features
+
+### Create Custom Agents
+```bash
+# Interactive agent creation
+./import-agents.sh --create
+
+# Using template
+cp templates/agent-template.md agents/custom/my-agent.md
+# Edit the file to customize
+```
+
+### Manage Agents
+```bash
 # List installed agents
 ./import-agents.sh --list
 
-# Show help
-./import-agents.sh --help
+# Update all agents
+./import-agents.sh --update
 
-# Interactive mode (default)
-./import-agents.sh
+# Backup agents
+./import-agents.sh --backup
+
+# Install all categories
+./import-agents.sh --all
 ```
 
-## 📁 File Structure
-
+## 📁 Repository Structure
 ```
 claudecodeagents/
-├── README.md                    # This file
-├── import-agents.sh            # Installation script
-├── context-manager.md          # Team coordination agent
-├── solution-architect.md       # Architecture design agent
-├── backend-developer.md        # Backend development agent
-├── frontend-developer.md       # Frontend development agent
-├── devops-engineer.md         # DevOps and infrastructure agent
-├── quality-engineer.md        # Testing and QA agent
-├── security-engineer.md       # Security specialist agent
-└── documentation-manager.md    # Documentation agent
+├── import-agents.sh              # Main installation script
+├── README.md                     # This file
+├── agents/                       # Agent definitions by category
+│   ├── generic/                  # General development team
+│   │   ├── manifest.json
+│   │   ├── context-manager.md
+│   │   ├── backend-developer.md
+│   │   └── ...
+│   ├── frameworks/               # Framework specialists
+│   │   ├── manifest.json
+│   │   ├── react-specialist.md
+│   │   └── ...
+│   ├── data-science/            # Data & ML agents
+│   ├── mobile/                  # Mobile development
+│   ├── gaming/                  # Game development
+│   ├── devops/                  # DevOps specialists
+│   ├── industry/                # Industry-specific
+│   └── specialized/             # Other specialists
+└── templates/                    # Templates for new agents
+    ├── agent-template.md
+    └── create-agent.sh
 ```
 
-## 🔄 How It Works
+## 🔧 Creating Your Own Agents
 
-1. **Context Management**: The `context-manager` maintains project state across sessions using persistent context files in `.claude/context/`
-
-2. **Team Coordination**: Agents work together automatically. When you ask the context-manager for help, it delegates tasks to appropriate specialists.
-
-3. **Persistent Memory**: Project decisions, progress, and architectural choices are stored and maintained across sessions.
-
-4. **Specialized Expertise**: Each agent has deep knowledge in their domain and follows industry best practices.
-
-## 🛠 Requirements
-
-- **Claude Code CLI**: Must be installed and configured
-- **Operating System**: Linux, macOS, or WSL on Windows
-- **Tools**: `curl` or `wget` for downloading
-- **Permissions**: Write access to `~/.config/claude/agents/`
-
-## 📝 Configuration
-
-### Setting Up Your Repository
-
-1. Fork or clone this repository
-2. The repository is ready to use with the correct URLs
-3. Push to your GitHub repository
-4. Share the installation command with your team
-
-### Custom Agent Directory
-
-If you use a custom Claude configuration directory, update the path in `import-agents.sh`:
-
+### Using the Template
+1. Copy the template:
 ```bash
-CLAUDE_AGENTS_DIR="$HOME/.config/claude/agents"  # Change this line
+cp templates/agent-template.md agents/custom/my-specialist.md
+```
+
+2. Edit the agent definition:
+- Set name, description, model, and color in frontmatter
+- Define core responsibilities
+- List technical expertise
+- Specify workflow and best practices
+
+3. Add to manifest:
+```json
+{
+  "category": "custom",
+  "agents": ["my-specialist"]
+}
+```
+
+### Agent Template Structure
+```markdown
+---
+name: agent-name
+description: Brief description
+model: sonnet  # or opus, haiku
+color: blue    # visual identifier
+---
+
+Main agent instructions and personality...
 ```
 
 ## 🤝 Contributing
 
-Feel free to customize these agents for your specific needs:
+### Adding New Agents
+1. Create agent file in appropriate category
+2. Follow the template structure
+3. Update category manifest.json
+4. Test locally
+5. Submit pull request
 
-1. Edit agent descriptions and capabilities
-2. Add new specialized agents
-3. Modify coordination protocols
-4. Enhance context management strategies
+### Creating New Categories
+1. Create new directory under `agents/`
+2. Add manifest.json
+3. Add at least 2-3 agents
+4. Update import script categories
+5. Update documentation
 
-## 📜 License
+## 📋 Installation Requirements
+- **Claude Code CLI** installed
+- **curl** or **wget** for downloading
+- **bash** shell
+- Write permissions to `~/.config/claude/agents/`
 
-This project is open source and available for anyone to use and modify.
+## 🔄 Updating
+
+### Update All Agents
+```bash
+./import-agents.sh --update
+```
+
+### Update from Repository
+```bash
+cd claudecodeagents
+git pull
+./import-agents.sh --update
+```
 
 ## 🐛 Troubleshooting
 
-### Claude Code not found
-- Ensure Claude Code is installed: https://docs.anthropic.com/en/docs/claude-code/quickstart
-- Add Claude to your PATH
+### Agents Not Appearing
+- Check installation directory: `ls ~/.config/claude/agents/`
+- Restart Claude Code
+- Verify agent file format
 
-### Permission denied
-```bash
-chmod +x import-agents.sh
-```
+### Download Failures
+- Check internet connection
+- Verify GitHub is accessible
+- Try manual download
 
-### Agents not appearing in Claude Code
-- Check the agents directory: `ls ~/.config/claude/agents/`
-- Restart Claude Code after installation
-- Verify agent files have `.md` extension
+### Custom Agents Not Working
+- Validate YAML frontmatter
+- Check agent name uniqueness
+- Ensure proper markdown format
 
-### Download failures
-- Check your internet connection
-- Verify the GitHub repository URL is correct
-- Try manual download and installation
-
-## 📚 Learn More
-
+## 📚 Resources
 - [Claude Code Documentation](https://docs.anthropic.com/en/docs/claude-code)
 - [Agent Development Guide](https://docs.anthropic.com/en/docs/claude-code/agents)
+- [Repository](https://github.com/SilvioTormen/claudecodeagents)
+
+## 📜 License
+Open source - Feel free to use, modify, and share!
+
+## 🌟 Tips
+- Start with the generic team for general projects
+- Add specialized agents as needed
+- Create custom agents for your specific workflows
+- Use context-manager to coordinate multiple agents
+- Backup your custom agents regularly
 
 ---
 

@@ -1,0 +1,14 @@
+{
+  "category": "generic",
+  "description": "General software development team agents",
+  "agents": [
+    "context-manager",
+    "solution-architect",
+    "backend-developer",
+    "frontend-developer",
+    "devops-engineer",
+    "quality-engineer",
+    "security-engineer",
+    "documentation-manager"
+  ]
+}

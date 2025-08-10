@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Claude Code Agent Import Script
-# Downloads and imports software development team agents for Claude Code
+# Claude Code Agent Import Script - Multi-Category Edition
+# Downloads and imports specialized AI agents for Claude Code
 # Repository: https://github.com/SilvioTormen/claudecodeagents
 
 set -e
@@ -17,19 +17,18 @@ NC='\033[0m' # No Color
 
 # Configuration
 CLAUDE_AGENTS_DIR="$HOME/.config/claude/agents"
-# GitHub repository for agent files
 GITHUB_BASE_URL="https://raw.githubusercontent.com/SilvioTormen/claudecodeagents/main"
 
-# Agent definitions
-declare -A AGENTS=(
-    ["context-manager"]="Project coordination and context management"
-    ["solution-architect"]="System design and architecture decisions"
-    ["backend-developer"]="Server-side development and APIs"
-    ["frontend-developer"]="UI/UX and client-side development"
-    ["devops-engineer"]="Infrastructure and deployment"
-    ["quality-engineer"]="Testing and quality assurance"
-    ["security-engineer"]="Security and compliance"
-    ["documentation-manager"]="Documentation and guides"
+# Agent Categories with descriptions
+declare -A CATEGORIES=(
+    ["generic"]="General software development team (recommended for most projects)"
+    ["specialized"]="Specialized technical agents (AI/ML, blockchain, etc.)"
+    ["frameworks"]="Framework-specific agents (React, Vue, Django, etc.)"
+    ["industry"]="Industry-specific agents (fintech, healthcare, e-commerce)"
+    ["devops"]="DevOps and infrastructure specialists"
+    ["data-science"]="Data science and analytics agents"
+    ["gaming"]="Game development specialists"
+    ["mobile"]="Mobile app development (iOS, Android, React Native)"
 )
 
 # Function to print colored output
@@ -57,29 +56,27 @@ print_header() {
 show_banner() {
     echo -e "${CYAN}"
     echo "╔════════════════════════════════════════════════════╗"
-    echo "║     Claude Code Software Development Team Agents   ║"
-    echo "║                 Auto-Import Tool                   ║"
+    echo "║     Claude Code AI Agents - Multi-Category Setup   ║"
+    echo "║                    Import Tool v2.0                ║"
     echo "╚════════════════════════════════════════════════════╝"
     echo -e "${NC}"
 }
 
 # Function to check if Claude Code is installed
 check_claude_code() {
-    print_header "Checking Claude Code installation..."
-    
     if ! command -v claude &> /dev/null; then
-        print_error "Claude Code CLI is not installed or not in PATH"
+        print_warning "Claude Code CLI not found"
         echo ""
         print_info "To install Claude Code, visit:"
         echo "    https://docs.anthropic.com/en/docs/claude-code/quickstart"
         echo ""
-        read -p "Do you want to continue anyway? (y/N) " -n 1 -r
+        read -p "Continue without Claude Code? (y/N) " -n 1 -r
         echo
         if [[ ! $REPLY =~ ^[Yy]$ ]]; then
             exit 1
         fi
     else
-        print_success "Claude Code CLI found at: $(which claude)"
+        print_success "Claude Code CLI found"
     fi
 }
 
@@ -90,92 +87,208 @@ create_agents_directory() {
         mkdir -p "$CLAUDE_AGENTS_DIR"
         print_success "Directory created: $CLAUDE_AGENTS_DIR"
     else
-        print_success "Agents directory exists: $CLAUDE_AGENTS_DIR"
+        print_success "Agents directory exists"
     fi
+}
+
+# Function to list available agents in a category
+list_category_agents() {
+    local category="$1"
+    local url="${GITHUB_BASE_URL}/agents/${category}/"
+    
+    # Try to fetch the list of agents (this is a simplified version)
+    # In reality, we'd need a manifest file or API access
+    echo "Checking agents in ${category}..."
+}
+
+# Function to download agents from a specific category
+download_category() {
+    local category="$1"
+    local category_url="${GITHUB_BASE_URL}/agents/${category}"
+    
+    print_header "Downloading ${category} agents..."
+    
+    # Download the category manifest first
+    local manifest_url="${category_url}/manifest.json"
+    local manifest_file="/tmp/claude-agents-${category}-manifest.json"
+    
+    if curl -fsSL "$manifest_url" -o "$manifest_file" 2>/dev/null; then
+        # Parse manifest and download each agent
+        if command -v jq &> /dev/null; then
+            local agents=$(jq -r '.agents[]' "$manifest_file" 2>/dev/null || echo "")
+            for agent in $agents; do
+                download_single_agent "${category}" "${agent}"
+            done
+        else
+            # Fallback: try to download known agents
+            download_known_agents "${category}"
+        fi
+    else
+        # Fallback for categories without manifest
+        download_known_agents "${category}"
+    fi
+}
+
+# Function to download known agents (fallback)
+download_known_agents() {
+    local category="$1"
+    
+    # Define known agents per category
+    case "$category" in
+        "generic")
+            local agents=("context-manager" "solution-architect" "backend-developer" "frontend-developer" "devops-engineer" "quality-engineer" "security-engineer" "documentation-manager")
+            ;;
+        "frameworks")
+            local agents=("react-specialist" "vue-specialist" "angular-specialist" "django-specialist" "rails-specialist" "spring-specialist")
+            ;;
+        "data-science")
+            local agents=("data-analyst" "ml-engineer" "data-engineer" "visualization-specialist")
+            ;;
+        *)
+            print_warning "No predefined agents for category: ${category}"
+            return
+            ;;
+    esac
+    
+    for agent in "${agents[@]}"; do
+        download_single_agent "${category}" "${agent}"
+    done
 }
 
 # Function to download a single agent
-download_agent() {
-    local agent_name="$1"
+download_single_agent() {
+    local category="$1"
+    local agent_name="$2"
     local agent_file="${agent_name}.md"
-    local url="${GITHUB_BASE_URL}/${agent_file}"
+    local url="${GITHUB_BASE_URL}/agents/${category}/${agent_file}"
     local target_file="${CLAUDE_AGENTS_DIR}/${agent_file}"
     
-    # Try to download the file
-    if command -v curl &> /dev/null; then
-        if curl -fsSL "$url" -o "$target_file" 2>/dev/null; then
-            return 0
-        fi
-    elif command -v wget &> /dev/null; then
-        if wget -q "$url" -O "$target_file" 2>/dev/null; then
-            return 0
-        fi
+    printf "  Downloading ${agent_name}..."
+    
+    if curl -fsSL "$url" -o "$target_file" 2>/dev/null; then
+        echo -e " ${GREEN}✓${NC}"
+        return 0
+    elif wget -q "$url" -O "$target_file" 2>/dev/null; then
+        echo -e " ${GREEN}✓${NC}"
+        return 0
     else
-        print_error "Neither curl nor wget is installed"
+        echo -e " ${RED}✗${NC}"
+        rm -f "$target_file" 2>/dev/null
         return 1
     fi
-    
-    return 1
 }
 
-# Function to import all agents
-import_all_agents() {
-    print_header "Downloading and importing agents..."
+# Function to select categories interactively
+select_categories() {
+    print_header "Available Agent Categories:"
     echo ""
     
-    local total=0
-    local imported=0
-    local failed=0
-    local failed_agents=()
-    
-    # Progress bar setup
-    local progress_width=40
-    
-    for agent_name in "${!AGENTS[@]}"; do
-        total=$((total + 1))
-        local description="${AGENTS[$agent_name]}"
-        
-        # Update progress
-        local percent=$((total * 100 / ${#AGENTS[@]}))
-        local filled=$((percent * progress_width / 100))
-        local empty=$((progress_width - filled))
-        
-        # Show progress bar
-        printf "\r["
-        printf "%${filled}s" | tr ' ' '='
-        printf "%${empty}s" | tr ' ' '-'
-        printf "] %3d%% " "$percent"
-        
-        # Try to download and import
-        if download_agent "$agent_name"; then
-            imported=$((imported + 1))
-            echo -e "\r${GREEN}✓${NC} ${agent_name}: ${description}"
-        else
-            failed=$((failed + 1))
-            failed_agents+=("$agent_name")
-            echo -e "\r${RED}✗${NC} ${agent_name}: Download failed"
-        fi
+    local i=1
+    local category_array=()
+    for category in "${!CATEGORIES[@]}"; do
+        category_array+=("$category")
+        printf "  ${CYAN}%2d)${NC} %-15s - %s\n" "$i" "$category" "${CATEGORIES[$category]}"
+        ((i++))
     done
     
     echo ""
-    print_header "────────────────────────────────────────"
-    print_info "Import Summary:"
-    echo -e "  Total agents:    ${total}"
-    echo -e "  ${GREEN}Imported:        ${imported}${NC}"
+    echo "  ${CYAN} a)${NC} All categories"
+    echo "  ${CYAN} g)${NC} Generic only (recommended for start)"
+    echo "  ${CYAN} c)${NC} Custom selection"
+    echo "  ${CYAN} q)${NC} Quit"
+    echo ""
     
-    if [ $failed -gt 0 ]; then
-        echo -e "  ${RED}Failed:          ${failed}${NC}"
-        echo ""
-        print_warning "Failed agents:"
-        for agent in "${failed_agents[@]}"; do
-            echo "    - $agent"
-        done
-    fi
+    read -p "Select option: " choice
+    
+    case "$choice" in
+        a|A)
+            for category in "${!CATEGORIES[@]}"; do
+                download_category "$category"
+            done
+            ;;
+        g|G)
+            download_category "generic"
+            ;;
+        c|C)
+            echo ""
+            print_info "Enter category numbers separated by spaces (e.g., 1 3 5):"
+            read -p "> " selections
+            for num in $selections; do
+                if [[ $num -ge 1 && $num -le ${#category_array[@]} ]]; then
+                    download_category "${category_array[$((num-1))]}"
+                fi
+            done
+            ;;
+        q|Q)
+            print_info "Installation cancelled"
+            exit 0
+            ;;
+        *)
+            if [[ $choice -ge 1 && $choice -le ${#category_array[@]} ]]; then
+                download_category "${category_array[$((choice-1))]}"
+            else
+                print_error "Invalid selection"
+                select_categories
+            fi
+            ;;
+    esac
 }
 
-# Function to list imported agents
-list_imported_agents() {
-    print_header "Imported agents in Claude Code:"
+# Function to create custom agent
+create_custom_agent() {
+    print_header "Create Custom Agent"
+    echo ""
+    
+    read -p "Agent name (e.g., 'my-specialist'): " agent_name
+    read -p "Agent description: " agent_desc
+    read -p "Agent color (red/blue/green/yellow/purple/cyan/orange): " agent_color
+    read -p "Model (sonnet/opus/haiku) [sonnet]: " agent_model
+    agent_model=${agent_model:-sonnet}
+    
+    # Create agent file from template
+    local template_url="${GITHUB_BASE_URL}/templates/agent-template.md"
+    local agent_file="${CLAUDE_AGENTS_DIR}/${agent_name}.md"
+    
+    cat > "$agent_file" << EOF
+---
+name: ${agent_name}
+description: ${agent_desc}
+model: ${agent_model}
+color: ${agent_color}
+---
+
+You are ${agent_name}, a specialized AI agent for Claude Code.
+
+## Core Responsibilities
+${agent_desc}
+
+## Workflow
+1. Analyze the task requirements
+2. Plan the implementation approach
+3. Execute with best practices
+4. Validate the results
+5. Document the changes
+
+## Specializations
+- Add your specializations here
+- Customize based on your needs
+
+## Best Practices
+- Follow industry standards
+- Ensure code quality
+- Maintain documentation
+- Consider performance and security
+EOF
+    
+    print_success "Custom agent created: ${agent_name}"
+    echo ""
+    print_info "Edit the agent file to customize further:"
+    echo "  ${agent_file}"
+}
+
+# Function to list installed agents
+list_installed_agents() {
+    print_header "Installed Agents:"
     echo ""
     
     if [ -d "$CLAUDE_AGENTS_DIR" ]; then
@@ -183,172 +296,236 @@ list_imported_agents() {
         for agent_file in "$CLAUDE_AGENTS_DIR"/*.md; do
             if [ -f "$agent_file" ]; then
                 local agent_name=$(basename "$agent_file" .md)
-                if [[ -n "${AGENTS[$agent_name]}" ]]; then
-                    echo -e "  ${GREEN}●${NC} @${agent_name}"
-                    echo -e "    └─ ${AGENTS[$agent_name]}"
-                    count=$((count + 1))
+                # Try to extract description from file
+                local description=$(grep "^description:" "$agent_file" 2>/dev/null | head -1 | cut -d: -f2- | xargs)
+                if [ -z "$description" ]; then
+                    description="Custom agent"
                 fi
+                echo -e "  ${GREEN}●${NC} @${agent_name}"
+                echo -e "    └─ ${description:0:60}..."
+                count=$((count + 1))
             fi
         done
         
         if [ $count -eq 0 ]; then
-            print_warning "No agents found in the directory"
+            print_warning "No agents installed"
+        else
+            echo ""
+            print_success "Total: $count agents"
         fi
     else
         print_error "Agents directory does not exist"
     fi
 }
 
-# Function to show usage instructions
-show_usage() {
-    echo ""
-    print_header "How to use the imported agents:"
-    echo ""
-    echo "1. In Claude Code, use agents with the @ syntax:"
-    echo -e "   ${CYAN}@context-manager${NC} help me set up a new project"
-    echo ""
-    echo "2. Agent specializations:"
-    echo ""
-    for agent_name in context-manager solution-architect backend-developer frontend-developer devops-engineer quality-engineer security-engineer documentation-manager; do
-        if [[ -n "${AGENTS[$agent_name]}" ]]; then
-            printf "   ${CYAN}%-25s${NC} %s\n" "@${agent_name}" "${AGENTS[$agent_name]}"
-        fi
-    done
-    echo ""
-    echo "3. The context-manager coordinates all team members automatically"
-    echo ""
-    echo "4. For complex projects, start with:"
-    echo -e "   ${CYAN}@context-manager${NC} initialize our new [project type] project"
-    echo ""
-}
-
-# Function to update existing installation
+# Function to update all installed agents
 update_agents() {
-    print_header "Updating existing agents..."
+    print_header "Updating installed agents..."
+    echo ""
     
     local updated=0
-    for agent_name in "${!AGENTS[@]}"; do
-        if download_agent "$agent_name"; then
-            updated=$((updated + 1))
-            print_success "Updated: $agent_name"
+    local failed=0
+    
+    for agent_file in "$CLAUDE_AGENTS_DIR"/*.md; do
+        if [ -f "$agent_file" ]; then
+            local agent_name=$(basename "$agent_file" .md)
+            # Try to find and update the agent from any category
+            local found=false
+            
+            for category in "${!CATEGORIES[@]}"; do
+                if download_single_agent "$category" "$agent_name" 2>/dev/null; then
+                    print_success "Updated: ${agent_name} (${category})"
+                    updated=$((updated + 1))
+                    found=true
+                    break
+                fi
+            done
+            
+            if [ "$found" = false ]; then
+                print_warning "Skipped: ${agent_name} (custom or not found)"
+            fi
         fi
     done
     
-    print_success "Updated $updated agents"
+    echo ""
+    print_info "Update complete: ${updated} updated, ${failed} failed"
 }
 
-# Function for interactive mode
-interactive_mode() {
+# Function to backup agents
+backup_agents() {
+    local backup_dir="$HOME/.config/claude/agents-backup-$(date +%Y%m%d-%H%M%S)"
+    
+    print_header "Backing up agents..."
+    
+    if [ -d "$CLAUDE_AGENTS_DIR" ]; then
+        cp -r "$CLAUDE_AGENTS_DIR" "$backup_dir"
+        print_success "Backup created: $backup_dir"
+    else
+        print_warning "No agents to backup"
+    fi
+}
+
+# Function to show usage
+show_usage() {
+    echo ""
+    print_header "How to use Claude Code Agents:"
+    echo ""
+    echo "1. Basic usage with @ mention:"
+    echo -e "   ${CYAN}@agent-name${NC} your request here"
+    echo ""
+    echo "2. Team coordination (generic agents):"
+    echo -e "   ${CYAN}@context-manager${NC} initialize our new project"
+    echo ""
+    echo "3. Specialized agents examples:"
+    echo -e "   ${CYAN}@react-specialist${NC} optimize our React components"
+    echo -e "   ${CYAN}@ml-engineer${NC} implement a recommendation system"
+    echo -e "   ${CYAN}@game-developer${NC} create a 2D physics engine"
+    echo ""
+    echo "4. Creating custom agents:"
+    echo "   Run: $0 --create"
+    echo ""
+}
+
+# Main menu
+main_menu() {
     show_banner
     echo ""
-    print_header "Welcome to Claude Code Agent Installer!"
+    print_header "Main Menu"
     echo ""
-    echo "This tool will download and install a complete software"
-    echo "development team of AI agents for your Claude Code setup."
+    echo "  1) Install agents by category"
+    echo "  2) Install all agents"
+    echo "  3) Install generic team only (recommended)"
+    echo "  4) Update installed agents"
+    echo "  5) List installed agents"
+    echo "  6) Create custom agent"
+    echo "  7) Backup agents"
+    echo "  8) Show usage guide"
+    echo "  9) Exit"
     echo ""
     
-    PS3="Please select an option: "
-    options=("Install all agents" "Update existing agents" "List installed agents" "Show usage guide" "Exit")
+    read -p "Select option [1-9]: " choice
     
-    select opt in "${options[@]}"
-    do
-        case $opt in
-            "Install all agents")
-                echo ""
-                check_claude_code
-                create_agents_directory
-                import_all_agents
-                show_usage
-                break
-                ;;
-            "Update existing agents")
-                echo ""
-                create_agents_directory
-                update_agents
-                break
-                ;;
-            "List installed agents")
-                echo ""
-                list_imported_agents
-                break
-                ;;
-            "Show usage guide")
-                show_usage
-                break
-                ;;
-            "Exit")
-                print_info "Goodbye!"
-                exit 0
-                ;;
-            *) 
-                print_error "Invalid option"
-                ;;
-        esac
-    done
-}
-
-# Main execution
-main() {
-    # Parse command line arguments
-    case "${1:-}" in
-        --install|-i)
-            show_banner
-            check_claude_code
+    case $choice in
+        1)
             create_agents_directory
-            import_all_agents
+            select_categories
             show_usage
             ;;
-        --update|-u)
-            show_banner
-            print_header "Update Mode"
+        2)
             create_agents_directory
+            for category in "${!CATEGORIES[@]}"; do
+                download_category "$category"
+            done
+            show_usage
+            ;;
+        3)
+            create_agents_directory
+            download_category "generic"
+            show_usage
+            ;;
+        4)
             update_agents
             ;;
-        --list|-l)
-            show_banner
-            list_imported_agents
+        5)
+            list_installed_agents
             ;;
-        --help|-h)
-            show_banner
-            echo "Usage: $0 [OPTIONS]"
-            echo ""
-            echo "Options:"
-            echo "  -i, --install    Download and install all agents"
-            echo "  -u, --update     Update existing agents"
-            echo "  -l, --list       List installed agents"
-            echo "  -h, --help       Show this help message"
-            echo "  (no options)     Interactive mode"
-            echo ""
-            echo "Quick install:"
-            echo "  curl -fsSL $GITHUB_BASE_URL/import-agents.sh | bash -s -- --install"
-            echo ""
-            echo "Repository:"
-            echo "  https://github.com/SilvioTormen/claudecodeagents"
+        6)
+            create_agents_directory
+            create_custom_agent
+            ;;
+        7)
+            backup_agents
+            ;;
+        8)
+            show_usage
+            ;;
+        9)
+            print_info "Goodbye!"
+            exit 0
             ;;
         *)
-            interactive_mode
+            print_error "Invalid option"
+            main_menu
             ;;
     esac
     
     echo ""
-    print_success "Done!"
+    read -p "Press Enter to continue..."
+    main_menu
 }
 
-# Check if script is being piped or run directly
-if [ -t 0 ] && [ -t 1 ]; then
-    # Interactive terminal
-    main "$@"
-else
-    # Being piped (e.g., curl | bash)
-    if [ "$#" -eq 0 ]; then
-        # No arguments provided with pipe, default to install
+# Parse command line arguments
+case "${1:-}" in
+    --install|-i)
         show_banner
         check_claude_code
         create_agents_directory
-        import_all_agents
+        
+        if [ -n "${2:-}" ]; then
+            # Install specific category
+            download_category "$2"
+        else
+            # Install generic by default
+            download_category "generic"
+        fi
         show_usage
-        print_success "Done!"
-    else
-        main "$@"
-    fi
-fi
+        ;;
+    --all|-a)
+        show_banner
+        check_claude_code
+        create_agents_directory
+        for category in "${!CATEGORIES[@]}"; do
+            download_category "$category"
+        done
+        show_usage
+        ;;
+    --update|-u)
+        show_banner
+        update_agents
+        ;;
+    --list|-l)
+        show_banner
+        list_installed_agents
+        ;;
+    --create|-c)
+        show_banner
+        create_agents_directory
+        create_custom_agent
+        ;;
+    --backup|-b)
+        show_banner
+        backup_agents
+        ;;
+    --help|-h)
+        show_banner
+        echo "Usage: $0 [OPTIONS] [CATEGORY]"
+        echo ""
+        echo "Options:"
+        echo "  -i, --install [CATEGORY]  Install agents (default: generic)"
+        echo "  -a, --all                 Install all agent categories"
+        echo "  -u, --update              Update installed agents"
+        echo "  -l, --list                List installed agents"
+        echo "  -c, --create              Create custom agent"
+        echo "  -b, --backup              Backup current agents"
+        echo "  -h, --help                Show this help"
+        echo "  (no options)              Interactive menu"
+        echo ""
+        echo "Categories:"
+        for cat in "${!CATEGORIES[@]}"; do
+            printf "  %-15s %s\n" "$cat" "${CATEGORIES[$cat]}"
+        done
+        echo ""
+        echo "Quick install examples:"
+        echo "  curl -fsSL $GITHUB_BASE_URL/import-agents.sh | bash -s -- --install"
+        echo "  curl -fsSL $GITHUB_BASE_URL/import-agents.sh | bash -s -- --install frameworks"
+        echo "  curl -fsSL $GITHUB_BASE_URL/import-agents.sh | bash -s -- --all"
+        ;;
+    *)
+        # Interactive mode
+        check_claude_code
+        main_menu
+        ;;
+esac
+
+echo ""
+print_success "Done!"

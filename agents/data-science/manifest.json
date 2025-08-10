@@ -1,0 +1,12 @@
+{
+  "category": "data-science",
+  "description": "Data science and analytics specialists",
+  "agents": [
+    "data-analyst",
+    "ml-engineer",
+    "data-engineer",
+    "visualization-specialist",
+    "nlp-specialist",
+    "cv-specialist"
+  ]
+}
