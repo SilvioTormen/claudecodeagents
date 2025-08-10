@@ -5,14 +5,52 @@ Eine umfassende Sammlung spezialisierter AI-Agenten für Claude Code - organisie
 ## 🚀 Schnellinstallation
 
 ### Automatische Installation mit setup-claude-agents.sh (Empfohlen)
+
+#### Komplettinstallation (Alle Agenten)
 ```bash
-# Vollständige Installation mit allen Agenten
+# Direkt von GitHub
 curl -fsSL https://raw.githubusercontent.com/SilvioTormen/claudecodeagents/main/setup-claude-agents.sh | bash
 
-# Oder direkt ausführen nach dem Klonen
+# Oder nach dem Klonen
 git clone https://github.com/SilvioTormen/claudecodeagents.git
 cd claudecodeagents
 ./setup-claude-agents.sh
+```
+
+#### Installation einzelner Kategorien
+```bash
+# Generisches Entwicklungsteam (Empfohlen für die meisten Projekte)
+./setup-claude-agents.sh --category generic
+
+# Framework-Spezialisten (React, Vue, Angular, etc.)
+./setup-claude-agents.sh --category frameworks
+
+# Data Science Team
+./setup-claude-agents.sh --category data-science
+
+# Mobile Entwicklung
+./setup-claude-agents.sh --category mobile
+
+# DevOps & Infrastructure
+./setup-claude-agents.sh --category devops
+
+# Gaming Entwicklung
+./setup-claude-agents.sh --category gaming
+
+# Spezialisierte Agenten (AI/ML, Blockchain, etc.)
+./setup-claude-agents.sh --category specialized
+
+# Branchenspezifische Agenten
+./setup-claude-agents.sh --category industry
+```
+
+#### Mehrere Kategorien gleichzeitig installieren
+```bash
+# Mehrere Kategorien auf einmal
+./setup-claude-agents.sh --categories "generic,frameworks,devops"
+
+# Interaktive Auswahl
+./setup-claude-agents.sh --interactive
 ```
 
 ### Alternative: Kategorie-basierte Installation
@@ -44,62 +82,85 @@ curl -fsSL https://raw.githubusercontent.com/SilvioTormen/claudecodeagents/main/
 ## 📦 Agenten-Kategorien
 
 ### Generic (Software-Entwicklungsteam)
+**Installation:** `./setup-claude-agents.sh --category generic`
+
 Komplettes Software-Entwicklungsteam für die meisten Projekte:
-- **@context-manager** - Project coordination and context management
-- **@solution-architect** - System design and architecture
-- **@backend-developer** - Server-side development
-- **@frontend-developer** - Client-side development
-- **@devops-engineer** - Infrastructure and deployment
-- **@quality-engineer** - Testing and QA
-- **@security-engineer** - Security and compliance
-- **@documentation-manager** - Documentation and guides
+- **@context-manager** - Projekt-Koordination und Kontext-Management
+- **@solution-architect** - System-Design und Architektur
+- **@backend-developer** - Server-seitige Entwicklung
+- **@frontend-developer** - Client-seitige Entwicklung
+- **@devops-engineer** - Infrastruktur und Deployment
+- **@quality-engineer** - Testing und Qualitätssicherung
+- **@security-engineer** - Sicherheit und Compliance
+- **@documentation-manager** - Dokumentation und Anleitungen
 
 ### Frameworks
-Framework-specific specialists:
-- **@react-specialist** - React and React ecosystem
-- **@vue-specialist** - Vue.js and Nuxt
-- **@angular-specialist** - Angular framework
+**Installation:** `./setup-claude-agents.sh --category frameworks`
+
+Framework-spezifische Spezialisten:
+- **@react-specialist** - React und React-Ökosystem
+- **@vue-specialist** - Vue.js und Nuxt
+- **@angular-specialist** - Angular Framework
 - **@django-specialist** - Django (Python)
 - **@rails-specialist** - Ruby on Rails
 - **@spring-specialist** - Spring Boot (Java)
 
 ### Data Science
-Data and ML specialists:
-- **@data-analyst** - Data analysis and visualization
-- **@ml-engineer** - Machine learning and deep learning
-- **@data-engineer** - Data pipelines and ETL
-- **@visualization-specialist** - Data visualization and dashboards
+**Installation:** `./setup-claude-agents.sh --category data-science`
+
+Daten- und ML-Spezialisten:
+- **@data-analyst** - Datenanalyse und Visualisierung
+- **@ml-engineer** - Machine Learning und Deep Learning
+- **@data-engineer** - Daten-Pipelines und ETL
+- **@visualization-specialist** - Datenvisualisierung und Dashboards
 
 ### Mobile Development
-Mobile app specialists:
+**Installation:** `./setup-claude-agents.sh --category mobile`
+
+Mobile-App-Spezialisten:
 - **@ios-developer** - Native iOS (Swift)
 - **@android-developer** - Native Android (Kotlin)
 - **@react-native-developer** - React Native
-- **@flutter-developer** - Flutter framework
+- **@flutter-developer** - Flutter Framework
 
 ### Gaming
-Game development specialists:
-- **@game-developer** - Unity/Unreal game development
-- **@game-designer** - Game mechanics and design
-- **@graphics-programmer** - Shaders and rendering
+**Installation:** `./setup-claude-agents.sh --category gaming`
+
+Spielentwicklungs-Spezialisten:
+- **@game-developer** - Unity/Unreal Spielentwicklung
+- **@game-designer** - Spielmechanik und Design
+- **@graphics-programmer** - Shader und Rendering
 
 ### DevOps & Infrastructure
-Specialized DevOps agents:
-- **@kubernetes-specialist** - K8s orchestration
-- **@aws-architect** - AWS cloud services
-- **@azure-architect** - Azure cloud services
+**Installation:** `./setup-claude-agents.sh --category devops`
+
+Spezialisierte DevOps-Agenten:
+- **@kubernetes-specialist** - K8s Orchestrierung
+- **@aws-architect** - AWS Cloud-Services
+- **@azure-architect** - Azure Cloud-Services
 - **@terraform-specialist** - Infrastructure as Code
 
 ### Industry Specific
-Domain-specific specialists:
-- **@fintech-developer** - Financial technology
-- **@healthcare-developer** - Healthcare/HIPAA compliance
-- **@ecommerce-specialist** - E-commerce platforms
-- **@blockchain-developer** - Web3 and blockchain
+**Installation:** `./setup-claude-agents.sh --category industry`
 
-## 💡 Usage Examples
+Branchenspezifische Spezialisten:
+- **@fintech-developer** - Finanztechnologie
+- **@healthcare-developer** - Gesundheitswesen/HIPAA-Compliance
+- **@ecommerce-specialist** - E-Commerce-Plattformen
+- **@blockchain-developer** - Web3 und Blockchain
 
-### Basic Usage
+### Specialized
+**Installation:** `./setup-claude-agents.sh --category specialized`
+
+Weitere technische Spezialisten:
+- **@ai-specialist** - KI und maschinelles Lernen
+- **@crypto-specialist** - Kryptographie und Sicherheit
+- **@iot-developer** - Internet of Things
+- **@embedded-developer** - Embedded Systems
+
+## 💡 Verwendungsbeispiele
+
+### Basis-Verwendung
 ```bash
 # Single agent
 @react-specialist optimize my React components for performance
@@ -138,8 +199,19 @@ Domain-specific specialists:
 
 ### Setup-Skript Optionen (setup-claude-agents.sh)
 ```bash
-# Vollständige Installation mit allen Funktionen
+# Vollständige Installation (alle Kategorien)
 ./setup-claude-agents.sh
+
+# Einzelne Kategorie installieren
+./setup-claude-agents.sh --category generic
+./setup-claude-agents.sh --category frameworks
+./setup-claude-agents.sh --category data-science
+
+# Mehrere Kategorien installieren
+./setup-claude-agents.sh --categories "generic,frameworks,devops"
+
+# Interaktive Kategorie-Auswahl
+./setup-claude-agents.sh --interactive
 
 # Nur spezifische Agenten installieren
 ./setup-claude-agents.sh --agents "backend-developer,frontend-developer"
@@ -149,6 +221,12 @@ Domain-specific specialists:
 
 # Backup erstellen vor Installation
 ./setup-claude-agents.sh --backup
+
+# Alle verfügbaren Kategorien anzeigen
+./setup-claude-agents.sh --list-categories
+
+# Hilfe anzeigen
+./setup-claude-agents.sh --help
 ```
 
 ### Eigene Agenten erstellen
