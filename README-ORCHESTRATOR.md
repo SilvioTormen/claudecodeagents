@@ -1,6 +1,6 @@
-# 🤖 Intelligenter Agent Orchestrator
+# 🤖 Intelligenter Agent Orchestrator für Claude Code
 
-Ein selbstständiger Orchestrator für Claude Code, der natürliche Sprache versteht und automatisch die richtigen Agents auswählt und koordiniert.
+Ein nativer `/orchestrate` Slash Command für Claude Code, der natürliche Sprache versteht und automatisch die richtigen Agents auswählt und koordiniert.
 
 ## ✨ Features
 
@@ -8,59 +8,54 @@ Ein selbstständiger Orchestrator für Claude Code, der natürliche Sprache vers
 - **Intelligente Analyse**: Erkennt Komplexität, Muster und benötigte Fähigkeiten
 - **Automatische Koordination**: Verteilt Aufgaben optimal an spezialisierte Agents
 - **Parallele Ausführung**: Nutzt mehrere Agents gleichzeitig wenn sinnvoll
-- **Lernendes System**: Verbessert sich mit jeder Nutzung
+- **Native Claude Integration**: Direkt als Slash Command verfügbar
 
 ## 🚀 Installation
+
+Die Orchestrator-Funktionalität ist bereits in Claude Code integriert, wenn die Agent-Dateien installiert sind:
 
 ```bash
 # Repository klonen
 git clone https://github.com/SilvioTormen/claudecodeagents.git
 cd claudecodeagents
 
-# Ausführbar machen
-chmod +x orchestrate.sh
-
-# Optional: Zu PATH hinzufügen
-echo "alias orchestrate='$(pwd)/orchestrate.sh'" >> ~/.bashrc
-source ~/.bashrc
+# Agents installieren (falls noch nicht geschehen)
+./setup-claude-agents.sh --category generic
 ```
 
-## 📝 Verwendung
+## 📝 Verwendung in Claude Code
 
-### Einfache Kommandos
+### Slash Command
 
-```bash
-# Direkte Ausführung
-./orchestrate.sh "Erstelle ein Login-System"
+Verwende einfach den `/orchestrate` Command direkt in Claude Code:
 
-# Mit Analyse (ohne Ausführung)
-./orchestrate.sh --analyze "Baue eine REST API mit Authentifizierung"
-
-# Interaktiver Modus
-./orchestrate.sh --interactive
+```
+/orchestrate Erstelle ein Login-System mit OAuth
+/orchestrate Optimiere die Performance der Datenbank
+/orchestrate Füge eine Zahlungsfunktion hinzu
 ```
 
 ### Beispiele
 
-```bash
+```
 # Komplexe Anwendung
-./orchestrate.sh "Erstelle ein Benutzerverwaltungssystem mit Login-Funktion"
+/orchestrate Erstelle ein Benutzerverwaltungssystem mit Login-Funktion
 # → Aktiviert: Context-Manager, Architect, Backend, Frontend, Security
 
 # Performance-Optimierung
-./orchestrate.sh "Optimiere die Performance der Datenbank-Abfragen"
+/orchestrate Optimiere die Performance der Datenbank-Abfragen
 # → Aktiviert: Quality-Engineer, Backend-Developer, DevOps
 
 # Einfache Aufgabe
-./orchestrate.sh "Schreibe Tests für die API"
+/orchestrate Schreibe Tests für die API
 # → Aktiviert: Quality-Engineer, Backend-Developer
 
 # Dokumentation
-./orchestrate.sh "Dokumentiere die REST API Endpoints"
+/orchestrate Dokumentiere die REST API Endpoints
 # → Aktiviert: Documentation-Manager
 
 # Feature-Entwicklung
-./orchestrate.sh "Füge eine Zahlungsfunktion mit Stripe hinzu"
+/orchestrate Füge eine Zahlungsfunktion mit Stripe hinzu
 # → Aktiviert: Solution-Architect, Backend, Frontend, Security, QA
 ```
 
@@ -129,28 +124,15 @@ Definiert die Fähigkeiten und Trigger für jeden Agent:
 3. **Keine Agent-Namen**: Lass den Orchestrator entscheiden
 4. **Iterativ arbeiten**: Starte einfach und erweitere schrittweise
 
-## 🐛 Debugging
-
-```bash
-# Logs anzeigen
-tail -f .orchestrator/orchestrator.log
-
-# Nur Analyse ohne Ausführung
-./orchestrate.sh --analyze "Deine Aufgabe"
-
-# Verfügbare Agents prüfen
-ls agents/generic/
-```
-
 ## 🤝 Integration mit Claude Code
 
-Der Orchestrator generiert Claude Code kompatible Commands:
+Der `/orchestrate` Command ist nativ in Claude Code integriert und generiert automatisch die passenden Agent-Commands:
 
-```bash
-# Orchestrator Input
-./orchestrate.sh "Erstelle eine TODO-App"
+```
+# User Input
+/orchestrate Erstelle eine TODO-App
 
-# Generierter Claude Command
+# Claude generiert intern
 @context-manager Koordiniere diese Aufgabe mit dem Team: "Erstelle eine TODO-App"
 ```
 
@@ -165,9 +147,8 @@ Der Orchestrator generiert Claude Code kompatible Commands:
 ## 💡 Tipps
 
 - **Große Projekte**: Teile sie in kleinere Aufgaben auf
-- **Debugging**: Nutze `--analyze` um den Plan zu sehen
-- **Performance**: Der Orchestrator cached Analysen für 15 Minuten
-- **Teams**: Bei Team-Projekten nutze den Context-Manager
+- **Komplexe Aufgaben**: Der Context-Manager wird automatisch aktiviert
+- **Teams**: Bei Team-Projekten koordiniert der Context-Manager automatisch
 
 ## 📝 Lizenz
 

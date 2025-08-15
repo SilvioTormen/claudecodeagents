@@ -115,7 +115,7 @@ Wenn User eingibt: `/orchestrate Erstelle ein Benutzerverwaltungssystem`
 
 ### Projekt-Dateien
 
-- `orchestrate.sh` - Standalone Orchestrator Script
-- `agent-intelligence.json` - Vollständige Agent-Wissensbasis
-- `.claude/slash_commands.json` - Slash Command Konfiguration
+- `agent-intelligence.json` - Vollständige Agent-Wissensbasis mit Fähigkeiten und Triggern
+- `.claude/slash_commands.json` - Slash Command Konfiguration für Claude Code
+- `.claude/CLAUDE.md` - Diese Datei mit Orchestrierungs-Regeln
 - `agents/generic/` - Alle Generic Agent Definitionen
