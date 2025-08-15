@@ -1,0 +1,24 @@
+{
+  "name": "claude-agent-cli",
+  "version": "4.1.0",
+  "description": "Interactive CLI for Claude Agent System",
+  "main": "interactive-cli.js",
+  "bin": {
+    "claude-cli": "./interactive-cli.js"
+  },
+  "scripts": {
+    "start": "node interactive-cli.js",
+    "test": "echo \"No tests yet\""
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "figlet": "^1.6.0",
+    "cli-table3": "^0.6.3",
+    "inquirer": "^8.2.5"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "author": "Claude Agent System",
+  "license": "MIT"
+}

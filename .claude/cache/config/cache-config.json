@@ -1,0 +1,106 @@
+{
+  "cache": {
+    "enabled": true,
+    "maxSize": 104857600,
+    "persistPath": "./.claude/cache/persistent-cache.json",
+    "autoPersist": true,
+    "persistInterval": 300000,
+    "cleanupInterval": 3600000,
+    "warmupOnStart": true,
+    
+    "ttl": {
+      "responses": 3600000,
+      "docs": 86400000,
+      "patterns": 7200000,
+      "memory": 1800000,
+      "agent-responses": 3600000,
+      "library-docs": 172800000,
+      "error-patterns": 604800000
+    },
+    
+    "categories": {
+      "responses": {
+        "description": "Cached agent responses",
+        "maxItems": 1000,
+        "priority": "high"
+      },
+      "docs": {
+        "description": "Library documentation from Context7",
+        "maxItems": 500,
+        "priority": "medium"
+      },
+      "patterns": {
+        "description": "Task pattern matches",
+        "maxItems": 200,
+        "priority": "high"
+      },
+      "memory": {
+        "description": "Frequently accessed memory files",
+        "maxItems": 100,
+        "priority": "medium"
+      }
+    },
+    
+    "warmup": {
+      "patterns": [
+        {
+          "type": "pattern",
+          "pattern": "login-system",
+          "agents": ["context-manager", "backend-developer", "frontend-developer", "security-engineer"],
+          "complexity": 4,
+          "successRate": 0.95
+        },
+        {
+          "type": "pattern",
+          "pattern": "crud-operations",
+          "agents": ["solution-architect", "backend-developer", "frontend-developer"],
+          "complexity": 3,
+          "successRate": 0.92
+        },
+        {
+          "type": "pattern",
+          "pattern": "api-development",
+          "agents": ["backend-developer", "security-engineer", "documentation-manager"],
+          "complexity": 3,
+          "successRate": 0.90
+        },
+        {
+          "type": "pattern",
+          "pattern": "performance-optimization",
+          "agents": ["quality-engineer", "backend-developer", "devops-engineer"],
+          "complexity": 4,
+          "successRate": 0.88
+        }
+      ],
+      
+      "libraries": [
+        {
+          "type": "doc",
+          "library": "react",
+          "version": "18.2.0",
+          "priority": "high"
+        },
+        {
+          "type": "doc",
+          "library": "express",
+          "version": "4.18.2",
+          "priority": "high"
+        },
+        {
+          "type": "doc",
+          "library": "vue",
+          "version": "3.3.0",
+          "priority": "medium"
+        }
+      ]
+    },
+    
+    "performance": {
+      "targetHitRate": 0.7,
+      "alertThreshold": {
+        "sizeUtilization": 0.9,
+        "hitRate": 0.3
+      }
+    }
+  }
+}
