@@ -19,12 +19,6 @@
       "name": "create-github-token",
       "available": true
     },
-    "data_analyst": {
-      "file": "agents/data-analyst.md",
-      "type": "subagent",
-      "name": "data-analyst",
-      "available": true
-    },
     "devops_engineer": {
       "file": "agents/devops-engineer.md",
       "type": "subagent",
@@ -43,22 +37,10 @@
       "name": "frontend-developer",
       "available": true
     },
-    "ml_engineer": {
-      "file": "agents/ml-engineer.md",
-      "type": "subagent",
-      "name": "ml-engineer",
-      "available": true
-    },
     "quality_engineer": {
       "file": "agents/quality-engineer.md",
       "type": "subagent",
       "name": "quality-engineer",
-      "available": true
-    },
-    "react_specialist": {
-      "file": "agents/react-specialist.md",
-      "type": "subagent",
-      "name": "react-specialist",
       "available": true
     },
     "security_engineer": {
@@ -71,12 +53,6 @@
       "file": "agents/solution-architect.md",
       "type": "subagent",
       "name": "solution-architect",
-      "available": true
-    },
-    "vue_specialist": {
-      "file": "agents/vue-specialist.md",
-      "type": "subagent",
-      "name": "vue-specialist",
       "available": true
     }
   }

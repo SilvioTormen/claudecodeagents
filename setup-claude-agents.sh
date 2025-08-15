@@ -25,12 +25,7 @@ CLAUDE_AGENTS_DIR="${CLAUDE_CONFIG_DIR}/agents"
 
 # Agent Categories with descriptions
 declare -A CATEGORIES=(
-    ["generic"]="General software development team (recommended for most projects)"
-    ["specialized"]="Specialized technical agents (AI/ML, blockchain, etc.)"
-    ["frameworks"]="Framework-specific agents (React, Vue, Django, etc.)"
-    ["industry"]="Industry-specific agents (fintech, healthcare, e-commerce)"
-    ["devops"]="DevOps and infrastructure specialists"
-    ["data-science"]="Data science and analytics agents"
+    ["generic"]="Complete software development team - All essential agents for modern projects"
 )
 
 # Function to print colored output
@@ -233,7 +228,7 @@ This project includes specialized AI agents for various development tasks. The a
    ```
    The orchestrator will automatically select and coordinate the right agents.
 
-### Generic Team Agents
+### Available Development Team Agents
 - `context-manager` - Manages project context and coordinates team activities
 - `solution-architect` - Designs system architecture and technical strategies
 - `backend-developer` - Handles server-side development and APIs
@@ -242,14 +237,6 @@ This project includes specialized AI agents for various development tasks. The a
 - `quality-engineer` - Manages testing and quality assurance
 - `security-engineer` - Handles security assessments and implementations
 - `documentation-manager` - Creates and maintains documentation
-
-### Framework Specialists
-- `react-specialist` - React.js development expert
-- `vue-specialist` - Vue.js development expert
-
-### Data Science Team
-- `data-analyst` - Data analysis and insights
-- `ml-engineer` - Machine learning implementations
 
 ## Project Setup
 
@@ -497,21 +484,15 @@ The agents are now configured and ready to use with Claude Code!
 
 The agents respond to the Task tool with the following subagent_type values:
 
-**Core Team:**
-- context_manager
-- solution_architect
-- backend_developer
-- frontend_developer
-- devops_engineer
-- quality_engineer
-- security_engineer
-- documentation_manager
-
-**Specialists:**
-- react_specialist
-- vue_specialist
-- data_analyst
-- ml_engineer
+**Available Agents:**
+- context_manager - Project coordination
+- solution_architect - System design
+- backend_developer - Server & API development
+- frontend_developer - UI/UX development
+- devops_engineer - Infrastructure & deployment
+- quality_engineer - Testing & QA
+- security_engineer - Security implementation
+- documentation_manager - Documentation
 
 ### Best Practices
 

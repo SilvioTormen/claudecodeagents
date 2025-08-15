@@ -13,9 +13,8 @@ Eine umfassende Sammlung spezialisierter AI-Agenten für Claude Code mit **intel
 
 ## 🚀 Schnellinstallation
 
-### Automatische Installation mit setup-claude-agents.sh (Empfohlen)
+### Automatische Installation (Empfohlen)
 
-#### Komplettinstallation (Alle Agenten)
 ```bash
 # Direkt von GitHub
 curl -fsSL https://raw.githubusercontent.com/SilvioTormen/claudecodeagents/main/setup-claude-agents.sh | bash
@@ -24,33 +23,6 @@ curl -fsSL https://raw.githubusercontent.com/SilvioTormen/claudecodeagents/main/
 git clone https://github.com/SilvioTormen/claudecodeagents.git
 cd claudecodeagents
 ./setup-claude-agents.sh
-```
-
-#### Installation einzelner Kategorien
-```bash
-# Generisches Entwicklungsteam (Empfohlen für die meisten Projekte)
-./setup-claude-agents.sh --category generic
-
-# Framework-Spezialisten (React, Vue, Angular, etc.)
-./setup-claude-agents.sh --category frameworks
-
-# Data Science Team
-./setup-claude-agents.sh --category data-science
-
-# DevOps & Infrastructure
-./setup-claude-agents.sh --category devops
-
-# Spezialisierte Agenten (AI/ML, Blockchain, etc.)
-./setup-claude-agents.sh --category specialized
-
-# Branchenspezifische Agenten
-./setup-claude-agents.sh --category industry
-```
-
-#### Mehrere Kategorien gleichzeitig installieren
-```bash
-# Mehrere Kategorien auf einmal
-./setup-claude-agents.sh --categories "generic,frameworks,devops"
 
 # Interaktive Auswahl
 ./setup-claude-agents.sh --interactive
@@ -96,73 +68,24 @@ curl -fsSL https://raw.githubusercontent.com/SilvioTormen/claudecodeagents/main/
 - **40% schnellere Task-Zuweisung** durch gelernte Patterns
 
 ### 👥 Team-Features
-- **20+ spezialisierte Agenten** für verschiedene Entwicklungsbereiche
+- **8 essenzielle Agenten** für vollständige Softwareentwicklung
 - **Team-Koordination** durch den Context Manager
 - **Parallele Ausführung** für unabhängige Tasks
-- **Kategorisierte Organisation** für einfache Verwaltung
+- **Fokussiert und effizient** ohne überflüssige Spezialisierungen
 - **Anpassbare Agenten** mit Template-System
 
-## 📦 Agenten-Kategorien
+## 🤖 Das Development Team
 
-### Generic (Software-Entwicklungsteam)
-**Installation:** `./setup-claude-agents.sh --category generic`
+Komplettes Software-Entwicklungsteam mit allen wichtigen Rollen:
 
-Komplettes Software-Entwicklungsteam für die meisten Projekte:
 - **@context-manager** - Projekt-Koordination und Kontext-Management
-- **@solution-architect** - System-Design und Architektur
-- **@backend-developer** - Server-seitige Entwicklung
-- **@frontend-developer** - Client-seitige Entwicklung
-- **@devops-engineer** - Infrastruktur und Deployment
-- **@quality-engineer** - Testing und Qualitätssicherung
-- **@security-engineer** - Sicherheit und Compliance
-- **@documentation-manager** - Dokumentation und Anleitungen
-
-### Frameworks
-**Installation:** `./setup-claude-agents.sh --category frameworks`
-
-Framework-spezifische Spezialisten:
-- **@react-specialist** - React und React-Ökosystem
-- **@vue-specialist** - Vue.js und Nuxt
-- **@angular-specialist** - Angular Framework
-- **@django-specialist** - Django (Python)
-- **@rails-specialist** - Ruby on Rails
-- **@spring-specialist** - Spring Boot (Java)
-
-### Data Science
-**Installation:** `./setup-claude-agents.sh --category data-science`
-
-Daten- und ML-Spezialisten:
-- **@data-analyst** - Datenanalyse und Visualisierung
-- **@ml-engineer** - Machine Learning und Deep Learning
-- **@data-engineer** - Daten-Pipelines und ETL
-- **@visualization-specialist** - Datenvisualisierung und Dashboards
-
-### DevOps & Infrastructure
-**Installation:** `./setup-claude-agents.sh --category devops`
-
-Spezialisierte DevOps-Agenten:
-- **@kubernetes-specialist** - K8s Orchestrierung
-- **@aws-architect** - AWS Cloud-Services
-- **@azure-architect** - Azure Cloud-Services
-- **@terraform-specialist** - Infrastructure as Code
-
-### Industry Specific
-**Installation:** `./setup-claude-agents.sh --category industry`
-
-Branchenspezifische Spezialisten:
-- **@fintech-developer** - Finanztechnologie
-- **@healthcare-developer** - Gesundheitswesen/HIPAA-Compliance
-- **@ecommerce-specialist** - E-Commerce-Plattformen
-- **@blockchain-developer** - Web3 und Blockchain
-
-### Specialized
-**Installation:** `./setup-claude-agents.sh --category specialized`
-
-Weitere technische Spezialisten:
-- **@ai-specialist** - KI und maschinelles Lernen
-- **@crypto-specialist** - Kryptographie und Sicherheit
-- **@iot-developer** - Internet of Things
-- **@embedded-developer** - Embedded Systems
+- **@solution-architect** - System-Design und Architektur-Entscheidungen
+- **@backend-developer** - Server, APIs, Datenbank-Design
+- **@frontend-developer** - UI/UX, Client-seitige Entwicklung
+- **@devops-engineer** - Infrastruktur, CI/CD, Deployment
+- **@quality-engineer** - Testing, QA, Performance-Optimierung
+- **@security-engineer** - Sicherheit, Authentication, Compliance
+- **@documentation-manager** - Technische Dokumentation, API-Docs
 
 ## 🎮 NEU: Interactive CLI
 
@@ -209,26 +132,29 @@ npm start
 
 ### Direkte Agent-Verwendung (für spezifische Aufgaben)
 ```bash
-# Single agent
-@react-specialist optimize my React components for performance
-
-# Team coordination
-@context-manager set up a new e-commerce project with React and Node.js
-```
-
-### Category-Specific Examples
-
-#### Web Development
-```bash
-@react-specialist implement infinite scrolling with virtualization
-@vue-specialist convert Options API components to Composition API
+# Backend Development
 @backend-developer create RESTful API with JWT authentication
-```
 
-#### Data Science
-```bash
-@ml-engineer build a recommendation system using collaborative filtering
-@data-analyst analyze user retention and create cohort analysis
+# Frontend Development
+@frontend-developer implement responsive dashboard with real-time updates
+
+# Security Implementation
+@security-engineer implement OAuth 2.0 with refresh tokens
+
+# Architecture Design
+@solution-architect design event-driven microservices architecture
+
+# Quality Assurance
+@quality-engineer create comprehensive test suite with coverage reports
+
+# DevOps
+@devops-engineer setup Kubernetes deployment with auto-scaling
+
+# Documentation
+@documentation-manager create API documentation with OpenAPI spec
+
+# Team Coordination
+@context-manager coordinate implementation of payment system
 ```
 
 ## 📊 Performance Optimierung
@@ -400,16 +326,16 @@ claudecodeagents/
 ├── MEMORY-GUIDE.md              # Memory-System Anleitung
 ├── agent-intelligence.json      # Agent-Wissensbasis
 ├── agents/                       # Agenten-Definitionen nach Kategorie
-│   ├── generic/                  # Allgemeines Entwicklungsteam
-│   │   ├── manifest.json
-│   │   ├── context-manager.md
-│   │   ├── backend-developer.md
-│   │   └── ...
-│   ├── frameworks/               # Framework-Spezialisten
-│   ├── data-science/            # Data & ML Agenten
-│   ├── devops/                  # DevOps Spezialisten
-│   ├── industry/                # Branchenspezifisch
-│   └── specialized/             # Weitere Spezialisten
+│   └── generic/                  # Komplettes Entwicklungsteam
+│       ├── manifest.json
+│       ├── context-manager.md
+│       ├── solution-architect.md
+│       ├── backend-developer.md
+│       ├── frontend-developer.md
+│       ├── devops-engineer.md
+│       ├── quality-engineer.md
+│       ├── security-engineer.md
+│       └── documentation-manager.md
 ├── templates/                    # Vorlagen für neue Agenten
 │   ├── agent-template.md
 │   └── create-agent.sh
