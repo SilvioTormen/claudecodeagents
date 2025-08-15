@@ -15,6 +15,27 @@
 - **Database**: [Projekt-spezifisch]
 - **Authentication**: [Projekt-spezifisch]
 
+## 🔒 Library Management Policy
+
+### CRITICAL: Dependency Control
+1. **NO new dependencies without approval** - Check approved-dependencies.md
+2. **ALWAYS use Context7** - Prefix library code with "use context7"
+3. **Security first** - Run npm audit before any installation
+4. **Bundle size aware** - Check impact before adding frontend libraries
+5. **Version control** - Stay within approved version ranges
+
+### Context7 Integration Protocol
+- **Setup Required**: Configure Context7 MCP in Claude Desktop
+- **Usage Pattern**: "use context7 [library] [feature]"
+- **Benefits**: Current docs, no hallucinations, version-specific
+
+### Library Approval Workflow
+1. Check if library is in approved-dependencies.md
+2. If not listed → Check for alternatives in approved list
+3. If needed → Submit approval request with justification
+4. Never install without verification
+5. Document decision in library-control.md
+
 ## 🔒 Security Standards
 
 ### Allgemeine Sicherheitsregeln

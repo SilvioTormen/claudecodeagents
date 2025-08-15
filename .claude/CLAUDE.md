@@ -9,6 +9,16 @@ Dieses Projekt enthält einen intelligenten, lernenden Orchestrator für Claude 
 @./.claude/memory/orchestrator-memory.md
 @./.claude/memory/team-decisions.md
 @./.claude/memory/project-history.md
+@./.claude/memory/library-control.md
+@./.claude/memory/approved-dependencies.md
+
+## 🔒 Library Control System
+
+### KRITISCH: Keine unauthorisierten Dependencies!
+1. **IMMER prüfen**: approved-dependencies.md vor jeder Library-Nutzung
+2. **Context7 nutzen**: "use context7 [library]" für aktuelle Docs
+3. **NIE installieren ohne Approval**: npm install nur nach Prüfung
+4. **Security First**: npm audit vor jeder Installation
 
 ## Slash Commands
 

@@ -1,0 +1,41 @@
+{
+  "description": "Claude Desktop configuration for Context7 MCP integration",
+  "instructions": "Add this configuration to ~/Library/Application Support/Claude/claude_desktop_config.json (macOS) or %APPDATA%/Claude/claude_desktop_config.json (Windows)",
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp"],
+      "description": "Provides up-to-date library documentation to prevent hallucinated APIs"
+    }
+  },
+  "example_full_config": {
+    "mcpServers": {
+      "context7": {
+        "command": "npx",
+        "args": ["-y", "@upstash/context7-mcp"]
+      },
+      "filesystem": {
+        "command": "npx",
+        "args": ["-y", "@modelcontextprotocol/server-filesystem", "/path/to/allowed/directory"]
+      }
+    }
+  },
+  "usage_examples": [
+    "use context7 react useState hook",
+    "use context7 express middleware error handling",
+    "use context7 vue3 composition api setup",
+    "use context7 mongoose schema validation",
+    "use context7 tailwindcss utility classes"
+  ],
+  "benefits": {
+    "accurate_docs": "Always current, version-specific documentation",
+    "no_hallucinations": "Real code examples, not imagined APIs",
+    "version_aware": "Matches your project's library versions",
+    "wide_coverage": "Supports most popular libraries"
+  },
+  "requirements": {
+    "node_version": ">=18.0.0",
+    "internet": "Required for fetching documentation",
+    "claude_desktop": "Latest version recommended"
+  }
+}

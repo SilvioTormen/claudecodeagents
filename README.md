@@ -1,4 +1,4 @@
-# Claude Code AI Agents Collection v4.0 🧠
+# Claude Code AI Agents Collection v4.1 🧠
 
 Eine umfassende Sammlung spezialisierter AI-Agenten für Claude Code mit **intelligentem Orchestrator** und **lernendem Memory-System**. Die Agenten arbeiten als koordiniertes Team, lernen aus Erfahrungen und verbessern sich kontinuierlich.
 
@@ -70,7 +70,14 @@ curl -fsSL https://raw.githubusercontent.com/SilvioTormen/claudecodeagents/main/
 curl -fsSL https://raw.githubusercontent.com/SilvioTormen/claudecodeagents/main/import-agents.sh | bash
 ```
 
-## ✨ Neue Features in v4.0
+## ✨ Neue Features in v4.1
+
+### 🔒 Library Control System (NEU!)
+- **Context7 Integration** - Verhindert veraltete/falsche Library-APIs
+- **Approved Dependencies List** - 100+ vorgeprüfte Libraries
+- **Automatic Security Checks** - npm audit vor Installation
+- **Bundle Size Control** - Performance-aware Dependency Management
+- **No "Vibe Coding"** - Strikte Kontrolle über neue Dependencies
 
 ### 🤖 Intelligenter Orchestrator
 - **`/orchestrate` Command** - Keine Agent-Namen mehr nötig!
@@ -220,6 +227,40 @@ Weitere technische Spezialisten:
 #### Gaming
 ```bash
 @game-developer implement multiplayer networking with client prediction
+```
+
+## 🔒 Library Control System
+
+Verhindert unkontrollierte Dependency-Additions und "Vibe Coding":
+
+### Context7 Integration
+```json
+// Setup in claude_desktop_config.json
+{
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp"]
+    }
+  }
+}
+```
+
+### Features
+- **Approved Dependencies List**: 100+ vorgeprüfte Libraries
+- **Context7 Protocol**: "use context7 [library]" für aktuelle Docs
+- **4 Sicherheitsstufen**: Core → Approved → Conditional → Blocked
+- **Automatic Checks**: Security audit, bundle size, maintenance status
+- **Approval Workflow**: Neue Libraries benötigen explizite Genehmigung
+
+### Verwendung
+```bash
+# Agent nutzt Library
+"use context7 react hooks useState"  # ✅ Aktuelle Docs
+"use context7 express middleware"     # ✅ Korrekte API
+
+# Check vor Installation
+cat .claude/memory/approved-dependencies.md
 ```
 
 ## 🧠 Memory-System
@@ -469,8 +510,15 @@ Open source - Feel free to use, modify, and share!
 - **Parallele Tasks**: Backend + Frontend gleichzeitig
 - **Security First**: Bei User-Daten automatisch Security-Agent
 
-## 📈 Was ist neu in v4.0?
+## 📈 Was ist neu in v4.1?
 
+### Neu in v4.1
+- 🔒 **Library Control System** mit Context7 Integration
+- ✅ **Approved Dependencies List** mit 100+ vorgeprüften Libraries
+- 🚫 **Anti "Vibe Coding"** - Keine unkontrollierten Dependencies
+- 📦 **Bundle Size Control** für Performance-Optimierung
+
+### Features aus v4.0
 - 🤖 **Intelligenter Orchestrator** mit `/orchestrate` Command
 - 🧠 **Lernendes Memory-System** für kontinuierliche Verbesserung
 - 📊 **23 vordefinierte Task-Patterns** für schnelleren Start
@@ -481,5 +529,5 @@ Open source - Feel free to use, modify, and share!
 ---
 
 **Repository**: https://github.com/SilvioTormen/claudecodeagents
-**Version**: 4.0 (Januar 2024)
+**Version**: 4.1 (Januar 2024)
 **Lizenz**: Open Source
