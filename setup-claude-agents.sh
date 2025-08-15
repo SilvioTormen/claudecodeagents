@@ -207,9 +207,15 @@ setup_local_claude() {
 create_claude_md() {
     local claude_md_file="${1:-${LOCAL_CLAUDE_DIR}/CLAUDE.md}"
     
-    print_info "Creating CLAUDE.md configuration..."
+    print_info "Creating CLAUDE.md with orchestrator configuration..."
     
-    cat > "$claude_md_file" << 'EOF'
+    # Check if the source CLAUDE.md exists and use it
+    if [ -f "${SCRIPT_DIR}/.claude/CLAUDE.md" ]; then
+        cp "${SCRIPT_DIR}/.claude/CLAUDE.md" "$claude_md_file"
+        print_success "Installed CLAUDE.md with /orchestrate command support"
+    else
+        # Fallback to basic configuration
+        cat > "$claude_md_file" << 'EOF'
 # Claude Code Configuration
 
 ## Available AI Agents
@@ -223,7 +229,11 @@ This project includes specialized AI agents for various development tasks. The a
    Use the Task tool with subagent_type parameter
    ```
 
-2. **Available Agent Types:**
+2. **Using /orchestrate command (recommended):**
+   ```
+   /orchestrate [your task in natural language]
+   ```
+   The orchestrator will automatically select and coordinate the right agents.
 
 ### Generic Team Agents
 - `context-manager` - Manages project context and coordinates team activities
@@ -256,9 +266,10 @@ The agent system prompts are located in `.claude/agents/` directory. Each agent 
 
 ## Quick Start
 
-1. Use `context-manager` to initialize and coordinate project activities
-2. Call specific specialists as needed for domain-specific tasks
-3. Use `documentation-manager` to maintain project documentation
+1. Use `/orchestrate` for automatic agent selection and coordination
+2. Or use `context-manager` to initialize and coordinate project activities
+3. Call specific specialists as needed for domain-specific tasks
+4. Use `documentation-manager` to maintain project documentation
 
 ## Notes
 
@@ -266,8 +277,25 @@ The agent system prompts are located in `.claude/agents/` directory. Each agent 
 - Use the context-manager for multi-agent coordination
 - Each agent maintains its own specialized knowledge domain
 EOF
+        print_success "Created basic CLAUDE.md configuration"
+    fi
+}
+
+# Function to install orchestrator files
+install_orchestrator() {
+    print_info "Installing orchestrator components..."
     
-    print_success "Created CLAUDE.md configuration"
+    # Install slash_commands.json if it exists
+    if [ -f "${SCRIPT_DIR}/.claude/slash_commands.json" ]; then
+        cp "${SCRIPT_DIR}/.claude/slash_commands.json" "${LOCAL_CLAUDE_DIR}/"
+        print_success "Installed slash_commands.json for /orchestrate command"
+    fi
+    
+    # Install agent-intelligence.json if it exists
+    if [ -f "${SCRIPT_DIR}/agent-intelligence.json" ]; then
+        cp "${SCRIPT_DIR}/agent-intelligence.json" "${LOCAL_CLAUDE_DIR}/"
+        print_success "Installed agent-intelligence.json knowledge base"
+    fi
 }
 
 # Function to setup system-wide Claude configuration
@@ -472,20 +500,24 @@ show_next_steps() {
     echo ""
     echo "1. The agents are now available in your project's .claude/ directory"
     echo ""
-    echo "2. In Claude Code, agents can be used via the Task tool:"
+    echo "2. ${GREEN}NEW: Use the /orchestrate command for automatic agent selection:${NC}"
+    echo "   ${CYAN}/orchestrate Create a login system${NC}"
+    echo "   ${CYAN}/orchestrate Optimize database performance${NC}"
+    echo ""
+    echo "3. Or use agents directly via the Task tool:"
     echo "   - Set subagent_type to any available agent"
     echo "   - Example: subagent_type='context-manager'"
-    echo ""
-    echo "3. Start with the context-manager to initialize your project:"
-    echo "   ${CYAN}Ask Claude to use the context-manager agent${NC}"
     echo ""
     echo "4. View available agents and documentation:"
     echo "   - ${CYAN}cat .claude/CLAUDE.md${NC}"
     echo "   - ${CYAN}cat .claude/USAGE.md${NC}"
     echo ""
-    echo "5. For team coordination, use context-manager to delegate tasks"
+    echo "5. The orchestrator will automatically:"
+    echo "   - Analyze task complexity"
+    echo "   - Select appropriate agents"
+    echo "   - Coordinate team collaboration"
     echo ""
-    print_info "Remember: Agents work best with clear, specific instructions!"
+    print_info "Remember: Just describe what you want - no need to specify agents!"
 }
 
 # Main execution
@@ -505,6 +537,9 @@ main() {
     
     # Setup local .claude directory
     setup_local_claude
+    
+    # Install orchestrator components
+    install_orchestrator
     
     # Generate agent registry
     generate_agent_registry

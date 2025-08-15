@@ -1,0 +1,15 @@
+[2025-08-15 21:10:01] Task: Erstelle ein Benutzerverwaltungssystem mit Login-Funktion
+[2025-08-15 21:10:01] Complexity: 4
+[2025-08-15 21:10:01] Pattern: crud_application
+[2025-08-15 21:10:01] Agents: @context-manager @solution-architect @backend-developer @frontend-developer @security-engineer
+[2025-08-15 21:10:01] Command: @context-manager Koordiniere diese Aufgabe mit dem Team: "Erstelle ein Benutzerverwaltungssystem mit Login-Funktion"\n\nBeteiligte Spezialisten die du einbeziehen sollst: @solution-architect @backend-developer @frontend-developer @security-engineer\n\nArbeite die Aufgabe systematisch ab und koordiniere die Zusammenarbeit.
+[2025-08-15 21:10:08] Task: Schreibe Tests für das Backend
+[2025-08-15 21:10:08] Complexity: 1
+[2025-08-15 21:10:08] Pattern: general
+[2025-08-15 21:10:08] Agents: @quality-engineer @backend-developer
+[2025-08-15 21:10:08] Command: Parallele Ausführung mit folgenden Agents:\n\n@quality-engineer: Bearbeite deinen Teil von: "Schreibe Tests für das Backend"\n@backend-developer: Bearbeite deinen Teil von: "Schreibe Tests für das Backend"
+[2025-08-15 21:10:15] Task: Mache die App schneller
+[2025-08-15 21:10:15] Complexity: 1
+[2025-08-15 21:10:15] Pattern: general
+[2025-08-15 21:10:15] Agents: 
+[2025-08-15 21:10:15] Command: Führe aus: Mache die App schneller
