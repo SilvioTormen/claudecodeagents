@@ -1,124 +1,83 @@
 {
   "version": "1.0",
   "agents": {
-    "android_developer": {
-      "file": "agents/android-developer.md",
-      "type": "subagent",
-      "name": "android-developer",
-      "available": true
-    }
-,
     "backend_developer": {
       "file": "agents/backend-developer.md",
       "type": "subagent",
       "name": "backend-developer",
       "available": true
-    }
-,
+    },
     "context_manager": {
       "file": "agents/context-manager.md",
       "type": "subagent",
       "name": "context-manager",
       "available": true
-    }
-,
+    },
     "create_github_token": {
       "file": "agents/create-github-token.md",
       "type": "subagent",
       "name": "create-github-token",
       "available": true
-    }
-,
+    },
     "data_analyst": {
       "file": "agents/data-analyst.md",
       "type": "subagent",
       "name": "data-analyst",
       "available": true
-    }
-,
+    },
     "devops_engineer": {
       "file": "agents/devops-engineer.md",
       "type": "subagent",
       "name": "devops-engineer",
       "available": true
-    }
-,
+    },
     "documentation_manager": {
       "file": "agents/documentation-manager.md",
       "type": "subagent",
       "name": "documentation-manager",
       "available": true
-    }
-,
+    },
     "frontend_developer": {
       "file": "agents/frontend-developer.md",
       "type": "subagent",
       "name": "frontend-developer",
       "available": true
-    }
-,
-    "game_developer": {
-      "file": "agents/game-developer.md",
-      "type": "subagent",
-      "name": "game-developer",
-      "available": true
-    }
-,
-    "ios_developer": {
-      "file": "agents/ios-developer.md",
-      "type": "subagent",
-      "name": "ios-developer",
-      "available": true
-    }
-,
+    },
     "ml_engineer": {
       "file": "agents/ml-engineer.md",
       "type": "subagent",
       "name": "ml-engineer",
       "available": true
-    }
-,
+    },
     "quality_engineer": {
       "file": "agents/quality-engineer.md",
       "type": "subagent",
       "name": "quality-engineer",
       "available": true
-    }
-,
+    },
     "react_specialist": {
       "file": "agents/react-specialist.md",
       "type": "subagent",
       "name": "react-specialist",
       "available": true
-    }
-,
-    "README": {
-      "file": "agents/README.md",
-      "type": "subagent",
-      "name": "README",
-      "available": true
-    }
-,
+    },
     "security_engineer": {
       "file": "agents/security-engineer.md",
       "type": "subagent",
       "name": "security-engineer",
       "available": true
-    }
-,
+    },
     "solution_architect": {
       "file": "agents/solution-architect.md",
       "type": "subagent",
       "name": "solution-architect",
       "available": true
-    }
-,
+    },
     "vue_specialist": {
       "file": "agents/vue-specialist.md",
       "type": "subagent",
       "name": "vue-specialist",
       "available": true
     }
-
   }
 }

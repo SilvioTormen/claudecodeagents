@@ -31,8 +31,6 @@ declare -A CATEGORIES=(
     ["industry"]="Industry-specific agents (fintech, healthcare, e-commerce)"
     ["devops"]="DevOps and infrastructure specialists"
     ["data-science"]="Data science and analytics agents"
-    ["gaming"]="Game development specialists"
-    ["mobile"]="Mobile app development (iOS, Android, React Native)"
 )
 
 # Function to print colored output
@@ -252,13 +250,6 @@ This project includes specialized AI agents for various development tasks. The a
 ### Data Science Team
 - `data-analyst` - Data analysis and insights
 - `ml-engineer` - Machine learning implementations
-
-### Mobile Development
-- `ios-developer` - iOS app development
-- `android-developer` - Android app development
-
-### Gaming
-- `game-developer` - Game development specialist
 
 ## Project Setup
 
@@ -521,9 +512,6 @@ The agents respond to the Task tool with the following subagent_type values:
 - vue_specialist
 - data_analyst
 - ml_engineer
-- ios_developer
-- android_developer
-- game_developer
 
 ### Best Practices
 

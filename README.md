@@ -37,14 +37,8 @@ cd claudecodeagents
 # Data Science Team
 ./setup-claude-agents.sh --category data-science
 
-# Mobile Entwicklung
-./setup-claude-agents.sh --category mobile
-
 # DevOps & Infrastructure
 ./setup-claude-agents.sh --category devops
-
-# Gaming Entwicklung
-./setup-claude-agents.sh --category gaming
 
 # Spezialisierte Agenten (AI/ML, Blockchain, etc.)
 ./setup-claude-agents.sh --category specialized
@@ -143,23 +137,6 @@ Daten- und ML-Spezialisten:
 - **@data-engineer** - Daten-Pipelines und ETL
 - **@visualization-specialist** - Datenvisualisierung und Dashboards
 
-### Mobile Development
-**Installation:** `./setup-claude-agents.sh --category mobile`
-
-Mobile-App-Spezialisten:
-- **@ios-developer** - Native iOS (Swift)
-- **@android-developer** - Native Android (Kotlin)
-- **@react-native-developer** - React Native
-- **@flutter-developer** - Flutter Framework
-
-### Gaming
-**Installation:** `./setup-claude-agents.sh --category gaming`
-
-Spielentwicklungs-Spezialisten:
-- **@game-developer** - Unity/Unreal Spielentwicklung
-- **@game-designer** - Spielmechanik und Design
-- **@graphics-programmer** - Shader und Rendering
-
 ### DevOps & Infrastructure
 **Installation:** `./setup-claude-agents.sh --category devops`
 
@@ -252,17 +229,6 @@ npm start
 ```bash
 @ml-engineer build a recommendation system using collaborative filtering
 @data-analyst analyze user retention and create cohort analysis
-```
-
-#### Mobile Development
-```bash
-@ios-developer implement push notifications with deep linking
-@android-developer optimize app for battery consumption
-```
-
-#### Gaming
-```bash
-@game-developer implement multiplayer networking with client prediction
 ```
 
 ## 📊 Performance Optimierung
@@ -441,8 +407,6 @@ claudecodeagents/
 │   │   └── ...
 │   ├── frameworks/               # Framework-Spezialisten
 │   ├── data-science/            # Data & ML Agenten
-│   ├── mobile/                  # Mobile Entwicklung
-│   ├── gaming/                  # Spieleentwicklung
 │   ├── devops/                  # DevOps Spezialisten
 │   ├── industry/                # Branchenspezifisch
 │   └── specialized/             # Weitere Spezialisten
