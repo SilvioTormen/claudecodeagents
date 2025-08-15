@@ -298,6 +298,40 @@ install_orchestrator() {
     fi
 }
 
+# Function to install memory system
+install_memory_system() {
+    print_info "Installing Memory System..."
+    
+    # Create memory directories
+    mkdir -p "${LOCAL_CLAUDE_DIR}/memory"
+    mkdir -p "${LOCAL_CLAUDE_DIR}/agents/memory"
+    mkdir -p "${LOCAL_CLAUDE_DIR}/context"
+    
+    # Copy memory files if they exist
+    if [ -d "${SCRIPT_DIR}/.claude/memory" ]; then
+        cp -r "${SCRIPT_DIR}/.claude/memory/"* "${LOCAL_CLAUDE_DIR}/memory/" 2>/dev/null || true
+        print_success "Installed orchestrator memory patterns"
+    fi
+    
+    if [ -d "${SCRIPT_DIR}/.claude/agents/memory" ]; then
+        cp -r "${SCRIPT_DIR}/.claude/agents/memory/"* "${LOCAL_CLAUDE_DIR}/agents/memory/" 2>/dev/null || true
+        print_success "Installed agent-specific memory templates"
+    fi
+    
+    if [ -d "${SCRIPT_DIR}/.claude/context" ]; then
+        cp -r "${SCRIPT_DIR}/.claude/context/"* "${LOCAL_CLAUDE_DIR}/context/" 2>/dev/null || true
+        print_success "Installed context management files"
+    fi
+    
+    # Copy memory guide if it exists
+    if [ -f "${SCRIPT_DIR}/MEMORY-GUIDE.md" ]; then
+        cp "${SCRIPT_DIR}/MEMORY-GUIDE.md" "${LOCAL_CLAUDE_DIR}/"
+        print_success "Installed Memory System documentation"
+    fi
+    
+    print_success "Memory System installation complete!"
+}
+
 # Function to setup system-wide Claude configuration
 setup_system_claude() {
     if [ ! -w "$HOME" ]; then
@@ -504,15 +538,21 @@ show_next_steps() {
     echo "   ${CYAN}/orchestrate Create a login system${NC}"
     echo "   ${CYAN}/orchestrate Optimize database performance${NC}"
     echo ""
-    echo "3. Or use agents directly via the Task tool:"
+    echo "3. ${GREEN}NEW: Memory System installed - Agents learn from experience!${NC}"
+    echo "   - Orchestrator remembers successful patterns"
+    echo "   - Agents store best practices"
+    echo "   - View guide: ${CYAN}cat .claude/MEMORY-GUIDE.md${NC}"
+    echo ""
+    echo "4. Or use agents directly via the Task tool:"
     echo "   - Set subagent_type to any available agent"
     echo "   - Example: subagent_type='context-manager'"
     echo ""
-    echo "4. View available agents and documentation:"
-    echo "   - ${CYAN}cat .claude/CLAUDE.md${NC}"
-    echo "   - ${CYAN}cat .claude/USAGE.md${NC}"
+    echo "5. View documentation:"
+    echo "   - ${CYAN}cat .claude/CLAUDE.md${NC} - Main configuration"
+    echo "   - ${CYAN}cat .claude/MEMORY-GUIDE.md${NC} - Memory system guide"
+    echo "   - ${CYAN}cat .claude/USAGE.md${NC} - Usage instructions"
     echo ""
-    echo "5. The orchestrator will automatically:"
+    echo "6. The orchestrator will automatically:"
     echo "   - Analyze task complexity"
     echo "   - Select appropriate agents"
     echo "   - Coordinate team collaboration"
@@ -540,6 +580,9 @@ main() {
     
     # Install orchestrator components
     install_orchestrator
+    
+    # Install memory system
+    install_memory_system
     
     # Generate agent registry
     generate_agent_registry

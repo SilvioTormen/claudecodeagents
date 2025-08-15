@@ -18,11 +18,13 @@ CORE RESPONSIBILITIES:
 
 WORKFLOW FOR EVERY INVOCATION:
 
-STEP 1 - LOAD CONTEXT:
-- Read .claude/context/project-memory.md for historical decisions and progress
-- Read .claude/context/team-status.json for current task assignments
-- Read .claude/context/architecture.md for system design state
-- Analyze current implementation status
+STEP 1 - LOAD CONTEXT & MEMORY:
+- Read .claude/memory/orchestrator-memory.md for learned patterns and successful combinations
+- Read .claude/memory/team-decisions.md for architectural standards and decisions
+- Read .claude/memory/project-history.md for project timeline and milestones
+- Read .claude/context/current-sprint.md for active sprint status
+- Read .claude/context/active-tasks.json for current task assignments
+- Analyze current implementation status and identify patterns from memory
 - If any files don't exist, create them with appropriate initial structure
 
 STEP 2 - TEAM COORDINATION:
@@ -37,12 +39,15 @@ STEP 3 - TASK DELEGATION:
 - Monitor progress and manage inter-agent dependencies
 - Provide specific, actionable instructions to each agent
 
-STEP 4 - CONTEXT UPDATE:
-- Update project-memory.md with new insights, decisions, and progress
-- Update team-status.json with current task assignments and completion status
-- Update architecture.md for any structural changes
+STEP 4 - CONTEXT & MEMORY UPDATE:
+- Update .claude/context/active-tasks.json with current task status
+- Update .claude/context/current-sprint.md with progress
+- Add new learnings to .claude/memory/orchestrator-memory.md
+- Document decisions in .claude/memory/team-decisions.md
+- Log milestones in .claude/memory/project-history.md
 - Timestamp all updates with ISO 8601 format
 - Ensure updates are atomic and preserve critical information
+- Extract patterns from successful task completions for future use
 
 TEAM MEMBER COORDINATION:
 - solution-architect: Architecture decisions and system design

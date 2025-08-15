@@ -1,8 +1,14 @@
 # Claude Code Agent Orchestrator - Project Context
 
-## 🤖 Intelligenter Agent Orchestrator
+## 🤖 Intelligenter Agent Orchestrator mit Memory-System
 
-Dieses Projekt enthält einen intelligenten Orchestrator für Claude Code Agents mit integriertem Slash Command.
+Dieses Projekt enthält einen intelligenten, lernenden Orchestrator für Claude Code Agents mit integriertem Slash Command und persistentem Memory-System.
+
+## 📚 Memory Imports
+<!-- Diese Dateien erweitern den Kontext mit gelerntem Wissen -->
+@./.claude/memory/orchestrator-memory.md
+@./.claude/memory/team-decisions.md
+@./.claude/memory/project-history.md
 
 ## Slash Commands
 

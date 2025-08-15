@@ -1,6 +1,6 @@
-# Claude Code AI Agents Collection v3.0
+# Claude Code AI Agents Collection v4.0 🧠
 
-Eine umfassende Sammlung spezialisierter AI-Agenten für Claude Code - organisiert nach Kategorien für maximale Produktivität. Jeder Agent ist ein Experte in seinem Bereich und kann eigenständig oder als Teil eines koordinierten Teams arbeiten.
+Eine umfassende Sammlung spezialisierter AI-Agenten für Claude Code mit **intelligentem Orchestrator** und **lernendem Memory-System**. Die Agenten arbeiten als koordiniertes Team, lernen aus Erfahrungen und verbessern sich kontinuierlich.
 
 ## 🚀 Schnellinstallation
 
@@ -70,14 +70,27 @@ curl -fsSL https://raw.githubusercontent.com/SilvioTormen/claudecodeagents/main/
 curl -fsSL https://raw.githubusercontent.com/SilvioTormen/claudecodeagents/main/import-agents.sh | bash
 ```
 
-## ✨ Features
+## ✨ Neue Features in v4.0
 
+### 🤖 Intelligenter Orchestrator
+- **`/orchestrate` Command** - Keine Agent-Namen mehr nötig!
+- **Automatische Agent-Auswahl** basierend auf natürlicher Sprache
+- **Komplexitätserkennung** und optimale Team-Zusammenstellung
+- **Pattern-Matching** für häufige Aufgabentypen
+
+### 🧠 Lernendes Memory-System
+- **Persistentes Gedächtnis** über Sessions hinweg
+- **Automatisches Lernen** aus erfolgreichen Tasks
+- **Best Practices Speicherung** pro Agent
+- **Team-Standards** und Architektur-Entscheidungen
+- **40% schnellere Task-Zuweisung** durch gelernte Patterns
+
+### 👥 Team-Features
 - **20+ spezialisierte Agenten** für verschiedene Entwicklungsbereiche
-- **Automatische Installation** mit einem einzigen Befehl
 - **Team-Koordination** durch den Context Manager
+- **Parallele Ausführung** für unabhängige Tasks
 - **Kategorisierte Organisation** für einfache Verwaltung
 - **Anpassbare Agenten** mit Template-System
-- **Regelmäßige Updates** verfügbar
 
 ## 📦 Agenten-Kategorien
 
@@ -160,7 +173,21 @@ Weitere technische Spezialisten:
 
 ## 💡 Verwendungsbeispiele
 
-### Basis-Verwendung
+### NEU: Orchestrator mit natürlicher Sprache (Empfohlen)
+```bash
+# Einfach beschreiben was du willst - keine Agent-Namen nötig!
+/orchestrate Erstelle ein Login-System mit OAuth
+/orchestrate Optimiere die Performance der Datenbank
+/orchestrate Füge eine Zahlungsfunktion mit Stripe hinzu
+/orchestrate Schreibe Tests für die API
+
+# Der Orchestrator wählt automatisch die richtigen Agents:
+# Login-System → context-manager, backend, frontend, security
+# Performance → quality-engineer, backend, devops
+# Zahlungsfunktion → architect, backend, frontend, security
+```
+
+### Direkte Agent-Verwendung (für spezifische Aufgaben)
 ```bash
 # Single agent
 @react-specialist optimize my React components for performance
@@ -193,6 +220,44 @@ Weitere technische Spezialisten:
 #### Gaming
 ```bash
 @game-developer implement multiplayer networking with client prediction
+```
+
+## 🧠 Memory-System
+
+Das integrierte Memory-System ermöglicht es den Agents, aus Erfahrungen zu lernen:
+
+### Memory-Architektur
+```
+.claude/
+├── memory/                      # Persistentes Team-Wissen
+│   ├── orchestrator-memory.md   # Gelernte Task-Patterns
+│   ├── team-decisions.md        # Architektur-Standards
+│   └── project-history.md       # Projekt-Timeline
+├── agents/memory/               # Agent-spezifisches Wissen
+│   ├── backend-patterns.md      # Backend Best Practices
+│   ├── frontend-patterns.md     # Frontend Patterns
+│   └── security-rules.md        # Security Standards
+└── context/                     # Session-Context
+    ├── current-sprint.md        # Sprint-Status
+    └── active-tasks.json        # Laufende Tasks
+```
+
+### Memory-Features
+- **Automatisches Lernen**: Speichert erfolgreiche Agent-Kombinationen
+- **Pattern-Erkennung**: Erkennt wiederkehrende Aufgaben
+- **Best Practices**: Agents dokumentieren Lösungen
+- **Team-Standards**: Konsistente Entscheidungen über Sessions
+
+### Memory-Nutzung
+```bash
+# Memory-Status anzeigen
+cat .claude/MEMORY-GUIDE.md
+
+# Orchestrator-Memory einsehen
+cat .claude/memory/orchestrator-memory.md
+
+# Team-Entscheidungen reviewen
+cat .claude/memory/team-decisions.md
 ```
 
 ## 🛠 Erweiterte Funktionen
@@ -257,10 +322,12 @@ cp templates/agent-template.md agents/custom/my-agent.md
 ## 📁 Repository-Struktur
 ```
 claudecodeagents/
-├── setup-claude-agents.sh       # Haupt-Installationsskript (v3.0)
+├── setup-claude-agents.sh       # Haupt-Installationsskript (v4.0)
 ├── import-agents.sh              # Kategorie-basierte Installation
 ├── README.md                     # Diese Datei
-├── push-to-github.sh            # GitHub Upload Helfer
+├── README-ORCHESTRATOR.md       # Orchestrator-Dokumentation
+├── MEMORY-GUIDE.md              # Memory-System Anleitung
+├── agent-intelligence.json      # Agent-Wissensbasis
 ├── agents/                       # Agenten-Definitionen nach Kategorie
 │   ├── generic/                  # Allgemeines Entwicklungsteam
 │   │   ├── manifest.json
@@ -268,9 +335,6 @@ claudecodeagents/
 │   │   ├── backend-developer.md
 │   │   └── ...
 │   ├── frameworks/               # Framework-Spezialisten
-│   │   ├── manifest.json
-│   │   ├── react-specialist.md
-│   │   └── ...
 │   ├── data-science/            # Data & ML Agenten
 │   ├── mobile/                  # Mobile Entwicklung
 │   ├── gaming/                  # Spieleentwicklung
@@ -281,9 +345,15 @@ claudecodeagents/
 │   ├── agent-template.md
 │   └── create-agent.sh
 └── .claude/                      # Claude Code Konfiguration
-    ├── CLAUDE.md                # Projekt-Kontext
+    ├── CLAUDE.md                # Hauptkonfiguration mit Orchestrator
+    ├── slash_commands.json      # /orchestrate Command Definition
+    ├── memory/                  # Persistentes Memory-System
+    │   ├── orchestrator-memory.md
+    │   ├── team-decisions.md
+    │   └── project-history.md
     ├── agents/                  # Installierte Agenten
-    └── agent-registry.json      # Agenten-Registry
+    │   └── memory/              # Agent-spezifisches Memory
+    └── context/                 # Session-Context
 ```
 
 ## 🔧 Creating Your Own Agents
@@ -382,13 +452,34 @@ git pull
 ## 📜 License
 Open source - Feel free to use, modify, and share!
 
-## 🌟 Tips
-- Start with the generic team for general projects
-- Add specialized agents as needed
-- Create custom agents for your specific workflows
-- Use context-manager to coordinate multiple agents
-- Backup your custom agents regularly
+## 🌟 Tips & Best Practices
+
+### Orchestrator-Nutzung
+- **Natürliche Sprache verwenden**: Beschreibe einfach was du willst
+- **Keine Agent-Namen nötig**: Der Orchestrator wählt automatisch
+- **Iterativ arbeiten**: Starte einfach, erweitere schrittweise
+
+### Memory-System
+- **Lernt automatisch**: Nach ~20 Tasks optimal trainiert
+- **Review Memory**: Checke regelmäßig team-decisions.md
+- **Dokumentiere Entscheidungen**: Werden für Team gespeichert
+
+### Team-Koordination
+- **Context-Manager nutzen**: Bei komplexen Projekten
+- **Parallele Tasks**: Backend + Frontend gleichzeitig
+- **Security First**: Bei User-Daten automatisch Security-Agent
+
+## 📈 Was ist neu in v4.0?
+
+- 🤖 **Intelligenter Orchestrator** mit `/orchestrate` Command
+- 🧠 **Lernendes Memory-System** für kontinuierliche Verbesserung
+- 📊 **23 vordefinierte Task-Patterns** für schnelleren Start
+- 🔐 **Security-Memory** mit OWASP und Best Practices
+- 📝 **Automatische Dokumentation** von Entscheidungen
+- ⚡ **40% schnellere Task-Zuweisung** durch Learning
 
 ---
 
 **Repository**: https://github.com/SilvioTormen/claudecodeagents
+**Version**: 4.0 (Januar 2024)
+**Lizenz**: Open Source
