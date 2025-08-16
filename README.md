@@ -18,14 +18,37 @@ cd claudecodeagents
 - `.claude/commands/` (project-specific)
 - `~/.claude/commands/` (global for all projects)
 
+## 🌟 NEW: Automatic Team Communication System
+
+All agents now automatically document their work for perfect team collaboration! When agents work on your project, they create documentation in `.claude/agent-communication/` that other agents read and use.
+
+### How It Works
+1. **Backend builds API** → Documents endpoints in `backend-api-spec.md`
+2. **Frontend reads docs** → Knows exactly how to integrate
+3. **Frontend needs feature** → Documents in `frontend-requirements.md`  
+4. **Backend implements** → Updates API spec
+5. **Perfect integration!** No guessing, no miscommunication
+
+### Communication Files Created
+```
+.claude/agent-communication/
+├── backend-api-spec.md         # API endpoints and examples
+├── frontend-components.md       # UI components and usage
+├── database-schema.md          # Database structure
+├── deployment-guide.md         # How to deploy
+├── security-requirements.md    # Security policies
+├── test-scenarios.md          # What to test
+└── team-status.md             # Overall project status
+```
+
 ## 🤖 Available Agents
 
-### Core Development Team
+### Core Development Team (with Communication Protocol)
 - `/orchestrate` - Intelligent task orchestration with natural language
-- `/context-manager` - Project coordination and context management
+- `/context-manager` - **Team coordinator** and communication hub
 - `/solution-architect` - System design and architecture decisions
-- `/backend-developer` - Server-side, APIs, database design
-- `/frontend-developer` - UI/UX, client-side development
+- `/backend-developer` - Server-side, APIs, **auto-documents for frontend**
+- `/frontend-developer` - UI/UX, **reads backend docs automatically**
 - `/devops-engineer` - Infrastructure, CI/CD, deployment
 - `/quality-engineer` - Testing, QA, performance optimization
 - `/security-engineer` - Security, authentication, compliance
