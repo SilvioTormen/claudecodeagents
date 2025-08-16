@@ -24,11 +24,10 @@ cd claudecodeagents
 
 Choose option 3 (Both locations) for best results.
 
-## 📋 Available Agents (10 Commands)
+## 📋 Available Agents (8 Commands)
 
 ### Core Orchestration
 - **`/orchestrate`** - Intelligent task router with project phase detection
-- **`/context-manager`** - Project coordinator and team communication hub
 
 ### Development Team  
 - **`/solution-architect`** - Tech stack recommendations and architecture design
@@ -51,7 +50,7 @@ Choose option 3 (Both locations) for best results.
 The orchestrator will:
 1. Call solution-architect for tech stack recommendations
 2. Get your approval on technology choices
-3. Set up project with context-manager
+3. Set up project with appropriate developer
 4. Coordinate developers for implementation
 5. Ensure testing and deployment
 
@@ -104,7 +103,7 @@ Agents automatically document their work in `.claude/agent-communication/`:
 ```
 solution-architect (tech stack)
     ↓
-context-manager (setup)
+solution-architect (architecture)
     ↓
 backend + frontend (parallel)
     ↓

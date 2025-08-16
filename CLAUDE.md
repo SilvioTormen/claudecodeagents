@@ -14,7 +14,6 @@ After installation, these commands are available:
 
 ### Core Commands
 - `/orchestrate [task]` - Intelligent task orchestration with automatic agent selection
-- `/context-manager` - Project coordination and context management
 - `/solution-architect` - System design and architecture decisions
 - `/backend-developer` - Server-side, APIs, database design
 - `/frontend-developer` - UI/UX, client-side development
