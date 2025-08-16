@@ -1,171 +1,189 @@
-# Claude Code AI Agents Collection 🤖
+# Claude Code Agents - Intelligent AI Team for Development 🤖
 
-A collection of specialized AI agents for Claude Code, available as slash commands after installation.
+A collection of specialized AI agents for Claude Code that work together as an intelligent development team. Each agent has specific expertise and can coordinate with others through a smart orchestration system.
 
-## 🚀 Quick Installation
+## ✨ Key Features
+
+- **🧠 Intelligent Orchestration**: Smart task routing based on context, not just keywords
+- **👥 Team Coordination**: Agents communicate and share context automatically
+- **🎯 User-Controlled Dependencies**: You decide the tech stack, agents respect it
+- **📊 Project Phase Awareness**: Different workflows for new projects vs existing ones
+- **🔄 Automatic Updates**: Dependency manager keeps your stack current (with approval)
+
+## 🚀 Quick Install
 
 ```bash
-# Direct from GitHub
+# One-line installation
 curl -fsSL https://raw.githubusercontent.com/SilvioTormen/claudecodeagents/main/setup-claude-agents.sh | bash
 
 # Or clone and install
-git clone https://github.com/SilvioTormen/claudecodeagents.git
+git clone https://github.com/SilvioTormen/claudecodeagents
 cd claudecodeagents
 ./setup-claude-agents.sh
 ```
 
-**Important:** Agents are installed as slash commands to:
-- `.claude/commands/` (project-specific)
-- `~/.claude/commands/` (global for all projects)
+Choose option 3 (Both locations) for best results.
 
-## 🌟 NEW: Automatic Team Communication System
+## 📋 Available Agents (10 Commands)
 
-All agents now automatically document their work for perfect team collaboration! When agents work on your project, they create documentation in `.claude/agent-communication/` that other agents read and use.
+### Core Orchestration
+- **`/orchestrate`** - Intelligent task router with project phase detection
+- **`/context-manager`** - Project coordinator and team communication hub
 
-### How It Works
-1. **Backend builds API** → Documents endpoints in `backend-api-spec.md`
-2. **Frontend reads docs** → Knows exactly how to integrate
-3. **Frontend needs feature** → Documents in `frontend-requirements.md`  
-4. **Backend implements** → Updates API spec
-5. **Perfect integration!** No guessing, no miscommunication
+### Development Team  
+- **`/solution-architect`** - Tech stack recommendations and architecture design
+- **`/backend-developer`** - APIs, databases, server-side logic
+- **`/frontend-developer`** - UI components, client-side development
+- **`/devops-engineer`** - Deployment, CI/CD, infrastructure
 
-### Communication Files Created
-```
-.claude/agent-communication/
-├── backend-api-spec.md         # API endpoints and examples
-├── frontend-components.md       # UI components and usage
-├── database-schema.md          # Database structure
-├── deployment-guide.md         # How to deploy
-├── security-requirements.md    # Security policies
-├── test-scenarios.md          # What to test
-└── team-status.md             # Overall project status
-```
+### Specialists
+- **`/security-engineer`** - Authentication, security, compliance
+- **`/quality-engineer`** - Testing, QA, performance optimization
+- **`/documentation-manager`** - Technical documentation, API docs
+- **`/dependency-manager`** - Package versions and updates
 
-## 🤖 Available Agents
+## 🎯 How to Use
 
-### Core Development Team (with Communication Protocol)
-- `/orchestrate` - Intelligent task orchestration with natural language
-- `/context-manager` - **Team coordinator** and communication hub
-- `/solution-architect` - System design and architecture decisions
-- `/backend-developer` - Server-side, APIs, **auto-documents for frontend**
-- `/frontend-developer` - UI/UX, **reads backend docs automatically**
-- `/devops-engineer` - Infrastructure, CI/CD, deployment
-- `/quality-engineer` - Testing, QA, performance optimization
-- `/security-engineer` - Security, authentication, compliance
-- `/documentation-manager` - Technical documentation, API docs
-
-### Specialized Experts (New!)
-- `/nextjs-14-expert` - Deep Next.js 14 App Router expertise
-- `/debug-detective` - Systematic debugging specialist
-- `/performance-optimizer` - Makes applications 10x faster
-
-## 💡 Usage Examples
-
-### Using the Orchestrator (Recommended)
+### Start a New Project
 ```bash
-# Natural language task delegation
-/orchestrate Create a login system with OAuth
-/orchestrate Optimize database performance
-/orchestrate Add payment functionality with Stripe
+/orchestrate I want to build a SaaS platform for project management
 ```
+The orchestrator will:
+1. Call solution-architect for tech stack recommendations
+2. Get your approval on technology choices
+3. Set up project with context-manager
+4. Coordinate developers for implementation
+5. Ensure testing and deployment
 
-The orchestrator automatically selects and coordinates the right agents for your task.
-
-### Direct Agent Commands
+### Add Features to Existing Project
 ```bash
-# Specific agent usage
-/backend-developer create RESTful API with JWT
-/frontend-developer implement responsive dashboard
-/security-engineer add OAuth 2.0 with refresh tokens
-/debug-detective find why the app freezes after 5 minutes
-/performance-optimizer reduce bundle size and load time
+/orchestrate Add real-time notifications to the dashboard
 ```
 
-## 📁 Repository Structure
+### Debug Issues
+```bash
+/orchestrate The login page shows a blank screen
+```
+
+### Maintain Dependencies
+```bash
+/dependency-manager check for updates
+```
+
+## 🔧 How It Works
+
+### 1. Intelligent Orchestration
+The orchestrator analyzes your request to understand:
+- **Intent**: What you actually want to achieve
+- **Context**: New project or existing codebase
+- **Complexity**: Single task or multi-step project
+- **Phase**: Development, debugging, or maintenance
+
+### 2. User-Controlled Tech Stack
+```json
+// .claude/project-dependencies.json
+{
+  "frontend": { "framework": "next", "version": "14.2.0" },
+  "backend": { "framework": "fastify", "version": "4.26.0" },
+  "database": { "type": "postgresql" },
+  "approvedBy": "user"
+}
+```
+You decide, agents follow.
+
+### 3. Team Communication
+Agents automatically document their work in `.claude/agent-communication/`:
+- API specifications
+- Database schemas  
+- Component documentation
+- Integration points
+
+### 4. Smart Workflows
+
+#### New Project Flow
+```
+solution-architect (tech stack)
+    ↓
+context-manager (setup)
+    ↓
+backend + frontend (parallel)
+    ↓
+quality-engineer (testing)
+    ↓
+devops-engineer (deployment)
+```
+
+#### Debugging Flow
+```
+Understand issue → Investigate → Route to right expert
+```
+
+## 📁 Clean Project Structure
 
 ```
 claudecodeagents/
-├── agents/                      # Agent definitions
-│   ├── generic/                # Core development team
-│   ├── specialized/            # Tech-stack experts
-│   └── problem-solvers/        # Issue-specific specialists
-├── setup-claude-agents.sh      # Main installation script
-├── import-agents.sh            # Alternative installer
-├── uninstall-agents.sh         # Clean removal tool
-├── CLAUDE.md                   # Project context for Claude Code
-└── IMPROVEMENTS.md             # Roadmap for future enhancements
+├── agents/
+│   └── generic/           # 10 agent definitions
+├── .claude/
+│   ├── commands/          # Installed commands (project)
+│   └── project-dependencies-template.json
+├── docs/                  # Documentation
+├── setup-claude-agents.sh # Installation script
+├── uninstall-agents.sh    # Uninstall script
+├── CLAUDE.md             # Project context
+└── README.md             # This file
 ```
 
-## 🛠 Advanced Usage
+## 🔄 Updating
 
-### Installation Options
 ```bash
-# Install to project only
-./setup-claude-agents.sh --project
-
-# Install globally only
-./setup-claude-agents.sh --global
-
-# Interactive installation (default)
-./setup-claude-agents.sh
-```
-
-### Managing Agents
-```bash
-# Update agents
+# Pull latest changes
 git pull
+
+# Reinstall agents
 ./setup-claude-agents.sh
-
-# Uninstall agents
-./uninstall-agents.sh
-
-# List installed agents
-./import-agents.sh --list
 ```
 
-### Creating Custom Agents
+## 🗑️ Uninstalling
+
 ```bash
-# Use the template
-cp templates/agent-template.md agents/custom/my-specialist.md
-# Edit the file with your specialization
-# Run setup to install
-./setup-claude-agents.sh
+./uninstall-agents.sh
 ```
 
-## 🎯 Philosophy
-
-This project focuses on:
-- **Specialized expertise** over generic roles
-- **Problem-solving** over role-playing
-- **Measurable results** over vague promises
-- **Simple installation** over complex setup
-
-## 📋 Requirements
-
-- Claude Code CLI (optional but recommended)
-- Bash shell
-- curl or wget for remote installation
-- Write permissions for `~/.claude/commands/`
+Creates backups before removing agents.
 
 ## 🤝 Contributing
 
-1. Create specialized agents that solve real problems
-2. Focus on measurable outcomes
-3. Keep agents focused and specific
-4. Test locally before submitting PRs
-5. Follow the existing template structure
+1. Agents should be focused and specialized
+2. Follow the existing agent template
+3. Include team communication protocol
+4. Test locally before submitting PR
 
-## 📚 Resources
+## 📚 Documentation
 
-- [Claude Code Documentation](https://docs.anthropic.com/en/docs/claude-code)
-- [Repository Issues](https://github.com/SilvioTormen/claudecodeagents/issues)
-- [Improvement Roadmap](IMPROVEMENTS.md)
+- [Centralized Dependencies](docs/centralized-dependencies.md) - How dependency management works
+- [Architect Recommendations](docs/architect-recommendations-example.md) - Example of tech stack selection
 
-## 📜 License
+## 🔒 Security & Philosophy
 
-Open source - Feel free to use, modify, and share!
+- **User Control**: Agents never auto-update dependencies without approval
+- **Transparency**: Technology choices require user confirmation
+- **Traceability**: All changes are documented
+- **Simplicity**: Clean codebase without legacy files
+
+## 📊 Version
+
+**v6.0** - Intelligent orchestration with user-controlled dependencies
+- Smart orchestrator with context understanding
+- Centralized dependency management
+- Team communication protocol
+- Cleaned up legacy code
+
+## 🆘 Support
+
+- **Issues**: [GitHub Issues](https://github.com/SilvioTormen/claudecodeagents/issues)
+- **Repository**: [github.com/SilvioTormen/claudecodeagents](https://github.com/SilvioTormen/claudecodeagents)
 
 ---
 
-**Version:** 5.0  
-**Repository:** https://github.com/SilvioTormen/claudecodeagents
+Made with ❤️ for Claude Code users who want an intelligent AI development team.
