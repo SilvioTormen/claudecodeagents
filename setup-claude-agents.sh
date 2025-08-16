@@ -19,7 +19,9 @@ NC='\033[0m' # No Color
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 AGENTS_SOURCE_DIR="${SCRIPT_DIR}/agents"
 LOCAL_COMMANDS_DIR="${SCRIPT_DIR}/.claude/commands"
+LOCAL_AGENTS_DIR="${SCRIPT_DIR}/.claude/agents"
 GLOBAL_COMMANDS_DIR="$HOME/.claude/commands"
+GLOBAL_AGENTS_DIR="$HOME/.claude/agents"
 
 # Function to print colored output
 print_info() {
@@ -58,15 +60,17 @@ check_claude_code() {
     fi
 }
 
-# Function to install agents
+# Function to install agents (both commands and agents)
 install_agents() {
-    local install_location="$1"
-    local description="$2"
+    local commands_location="$1"
+    local agents_location="$2"
+    local description="$3"
     
     print_info "Installing agents to $description..."
     
-    # Create directory if it doesn't exist
-    mkdir -p "$install_location"
+    # Create directories if they don't exist
+    mkdir -p "$commands_location"
+    mkdir -p "$agents_location"
     
     # Copy only proper agent files (excluding old versions and README)
     local copied=0
@@ -79,15 +83,17 @@ install_agents() {
                    [[ "$filename" != "README.md" ]] && \
                    [[ "$filename" != "TEAM-COMMUNICATION-PROTOCOL.md" ]] && \
                    [[ "$filename" != "create-github-token.md" ]]; then
-                    cp "$agent_file" "$install_location/"
+                    # Install as both command and agent
+                    cp "$agent_file" "$commands_location/"
+                    cp "$agent_file" "$agents_location/"
                     copied=$((copied + 1))
                 fi
             fi
         done
     fi
     
-    # Create orchestrate command
-    cat > "$install_location/orchestrate.md" << 'EOF'
+    # Create orchestrate command (only as command, not as agent)
+    cat > "$commands_location/orchestrate.md" << 'EOF'
 ---
 description: Intelligently orchestrate multiple agents for complex tasks
 argument-hint: task description
@@ -244,7 +250,7 @@ EOF
     copied=$((copied + 1))
     
     if [ $copied -gt 0 ]; then
-        print_success "Installed $copied commands to $description"
+        print_success "Installed $copied agents and commands to $description"
     else
         print_error "No agents found to install"
     fi
@@ -293,14 +299,14 @@ main() {
     
     case $choice in
         1)
-            install_agents "$LOCAL_COMMANDS_DIR" "project commands"
+            install_agents "$LOCAL_COMMANDS_DIR" "$LOCAL_AGENTS_DIR" "project location"
             ;;
         2)
-            install_agents "$GLOBAL_COMMANDS_DIR" "global commands"
+            install_agents "$GLOBAL_COMMANDS_DIR" "$GLOBAL_AGENTS_DIR" "global location"
             ;;
         3|"")
-            install_agents "$LOCAL_COMMANDS_DIR" "project commands"
-            install_agents "$GLOBAL_COMMANDS_DIR" "global commands"
+            install_agents "$LOCAL_COMMANDS_DIR" "$LOCAL_AGENTS_DIR" "project location"
+            install_agents "$GLOBAL_COMMANDS_DIR" "$GLOBAL_AGENTS_DIR" "global location"
             ;;
         *)
             print_error "Invalid choice"
@@ -341,12 +347,12 @@ case "${1:-}" in
         ;;
     --project)
         show_banner
-        install_agents "$LOCAL_COMMANDS_DIR" "project commands"
+        install_agents "$LOCAL_COMMANDS_DIR" "$LOCAL_AGENTS_DIR" "project location"
         list_commands "$LOCAL_COMMANDS_DIR" "Installed project commands"
         ;;
     --global)
         show_banner
-        install_agents "$GLOBAL_COMMANDS_DIR" "global commands"
+        install_agents "$GLOBAL_COMMANDS_DIR" "$GLOBAL_AGENTS_DIR" "global location"
         list_commands "$GLOBAL_COMMANDS_DIR" "Installed global commands"
         ;;
     *)
