@@ -16,7 +16,7 @@ Eine umfassende Sammlung spezialisierter AI-Agenten für Claude Code mit **intel
 ### Automatische Installation (Empfohlen)
 
 ```bash
-# Direkt von GitHub
+# Direkt von GitHub - installiert Agents als Slash-Commands!
 curl -fsSL https://raw.githubusercontent.com/SilvioTormen/claudecodeagents/main/setup-claude-agents.sh | bash
 
 # Oder nach dem Klonen
@@ -27,6 +27,8 @@ cd claudecodeagents
 # Interaktive Auswahl
 ./setup-claude-agents.sh --interactive
 ```
+
+**NEU:** Agents werden jetzt automatisch als Slash-Commands in `.claude/commands/` und `~/.claude/commands/` installiert!
 
 ### Alternative: Kategorie-basierte Installation
 ```bash
@@ -76,16 +78,18 @@ curl -fsSL https://raw.githubusercontent.com/SilvioTormen/claudecodeagents/main/
 
 ## 🤖 Das Development Team
 
-Komplettes Software-Entwicklungsteam mit allen wichtigen Rollen:
+Komplettes Software-Entwicklungsteam mit allen wichtigen Rollen - **jetzt als Slash-Commands verfügbar!**
 
-- **@context-manager** - Projekt-Koordination und Kontext-Management
-- **@solution-architect** - System-Design und Architektur-Entscheidungen
-- **@backend-developer** - Server, APIs, Datenbank-Design
-- **@frontend-developer** - UI/UX, Client-seitige Entwicklung
-- **@devops-engineer** - Infrastruktur, CI/CD, Deployment
-- **@quality-engineer** - Testing, QA, Performance-Optimierung
-- **@security-engineer** - Sicherheit, Authentication, Compliance
-- **@documentation-manager** - Technische Dokumentation, API-Docs
+### Als Slash-Commands (NEU!):
+- **/orchestrate** - Intelligente Orchestrierung mit natürlicher Sprache
+- **/context-manager** - Projekt-Koordination und Kontext-Management
+- **/solution-architect** - System-Design und Architektur-Entscheidungen
+- **/backend-developer** - Server, APIs, Datenbank-Design
+- **/frontend-developer** - UI/UX, Client-seitige Entwicklung
+- **/devops-engineer** - Infrastruktur, CI/CD, Deployment
+- **/quality-engineer** - Testing, QA, Performance-Optimierung
+- **/security-engineer** - Sicherheit, Authentication, Compliance
+- **/documentation-manager** - Technische Dokumentation, API-Docs
 
 ## 🎮 NEU: Interactive CLI
 
@@ -130,31 +134,31 @@ npm start
 # Zahlungsfunktion → architect, backend, frontend, security
 ```
 
-### Direkte Agent-Verwendung (für spezifische Aufgaben)
+### Direkte Agent-Verwendung als Slash-Commands
 ```bash
 # Backend Development
-@backend-developer create RESTful API with JWT authentication
+/backend-developer create RESTful API with JWT authentication
 
 # Frontend Development
-@frontend-developer implement responsive dashboard with real-time updates
+/frontend-developer implement responsive dashboard with real-time updates
 
 # Security Implementation
-@security-engineer implement OAuth 2.0 with refresh tokens
+/security-engineer implement OAuth 2.0 with refresh tokens
 
 # Architecture Design
-@solution-architect design event-driven microservices architecture
+/solution-architect design event-driven microservices architecture
 
 # Quality Assurance
-@quality-engineer create comprehensive test suite with coverage reports
+/quality-engineer create comprehensive test suite with coverage reports
 
 # DevOps
-@devops-engineer setup Kubernetes deployment with auto-scaling
+/devops-engineer setup Kubernetes deployment with auto-scaling
 
 # Documentation
-@documentation-manager create API documentation with OpenAPI spec
+/documentation-manager create API documentation with OpenAPI spec
 
 # Team Coordination
-@context-manager coordinate implementation of payment system
+/context-manager coordinate implementation of payment system
 ```
 
 ## 📊 Performance Optimierung
@@ -226,6 +230,11 @@ Das integrierte Memory-System ermöglicht es den Agents, aus Erfahrungen zu lern
 ### Memory-Architektur
 ```
 .claude/
+├── commands/                    # Slash-Commands (Agents)
+│   ├── orchestrate.md           # Orchestrator Command
+│   ├── backend-developer.md     # Backend Agent
+│   ├── frontend-developer.md    # Frontend Agent
+│   └── ...                      # Weitere Agent-Commands
 ├── memory/                      # Persistentes Team-Wissen
 │   ├── orchestrator-memory.md   # Gelernte Task-Patterns
 │   ├── team-decisions.md        # Architektur-Standards
@@ -340,13 +349,16 @@ claudecodeagents/
 │   ├── agent-template.md
 │   └── create-agent.sh
 └── .claude/                      # Claude Code Konfiguration
+    ├── commands/                # Slash-Commands (NEU!)
+    │   ├── orchestrate.md       # /orchestrate Command
+    │   ├── backend-developer.md # /backend-developer Command
+    │   └── ...                  # Weitere Agent-Commands
     ├── CLAUDE.md                # Hauptkonfiguration mit Orchestrator
-    ├── slash_commands.json      # /orchestrate Command Definition
     ├── memory/                  # Persistentes Memory-System
     │   ├── orchestrator-memory.md
     │   ├── team-decisions.md
     │   └── project-history.md
-    ├── agents/                  # Installierte Agenten
+    ├── agents/                  # Agent-Definitionen (Legacy)
     │   └── memory/              # Agent-spezifisches Memory
     └── context/                 # Session-Context
 ```
@@ -405,7 +417,8 @@ Main agent instructions and personality...
 - **Claude Code CLI** installiert
 - **curl** oder **wget** für Downloads
 - **bash** Shell
-- Schreibrechte für `~/.config/claude/agents/`
+- Schreibrechte für `~/.claude/commands/` (NEU: Für Slash-Commands)
+- Schreibrechte für `~/.config/claude/agents/` (Legacy-Support)
 - **Git** (optional, für Repository-Klonen)
 
 ## 🔄 Updating
@@ -424,10 +437,13 @@ git pull
 
 ## 🐛 Troubleshooting
 
-### Agents Not Appearing
-- Check installation directory: `ls ~/.config/claude/agents/`
+### Agents/Commands Not Appearing
+- Check commands directory: `ls ~/.claude/commands/` (NEU!)
+- Check project commands: `ls .claude/commands/`
+- Check legacy directory: `ls ~/.config/claude/agents/`
 - Restart Claude Code
 - Verify agent file format
+- Use `/help` in Claude Code to see available commands
 
 ### Download Failures
 - Check internet connection

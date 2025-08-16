@@ -16,7 +16,8 @@ CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 
 # Configuration
-CLAUDE_AGENTS_DIR="$HOME/.config/claude/agents"
+CLAUDE_AGENTS_DIR="$HOME/.config/claude/agents"  # Legacy location
+CLAUDE_COMMANDS_DIR="$HOME/.claude/commands"      # New location for slash commands
 GITHUB_BASE_URL="https://raw.githubusercontent.com/SilvioTormen/claudecodeagents/main"
 
 # Agent Categories with descriptions
@@ -82,12 +83,22 @@ check_claude_code() {
 
 # Function to create agents directory
 create_agents_directory() {
+    # Create both directories for compatibility
     if [ ! -d "$CLAUDE_AGENTS_DIR" ]; then
         print_info "Creating Claude agents directory..."
         mkdir -p "$CLAUDE_AGENTS_DIR"
         print_success "Directory created: $CLAUDE_AGENTS_DIR"
     else
         print_success "Agents directory exists"
+    fi
+    
+    # Create new commands directory for slash commands
+    if [ ! -d "$CLAUDE_COMMANDS_DIR" ]; then
+        print_info "Creating Claude commands directory..."
+        mkdir -p "$CLAUDE_COMMANDS_DIR"
+        print_success "Commands directory created: $CLAUDE_COMMANDS_DIR"
+    else
+        print_success "Commands directory exists"
     fi
 }
 
@@ -162,13 +173,18 @@ download_single_agent() {
     local agent_file="${agent_name}.md"
     local url="${GITHUB_BASE_URL}/agents/${category}/${agent_file}"
     local target_file="${CLAUDE_AGENTS_DIR}/${agent_file}"
+    local command_file="${CLAUDE_COMMANDS_DIR}/${agent_file}"
     
     printf "  Downloading ${agent_name}..."
     
     if curl -fsSL "$url" -o "$target_file" 2>/dev/null; then
+        # Also copy to commands directory for slash command support
+        cp "$target_file" "$command_file" 2>/dev/null
         echo -e " ${GREEN}✓${NC}"
         return 0
     elif wget -q "$url" -O "$target_file" 2>/dev/null; then
+        # Also copy to commands directory for slash command support
+        cp "$target_file" "$command_file" 2>/dev/null
         echo -e " ${GREEN}✓${NC}"
         return 0
     else
@@ -291,9 +307,10 @@ list_installed_agents() {
     print_header "Installed Agents:"
     echo ""
     
-    if [ -d "$CLAUDE_AGENTS_DIR" ]; then
+    # Check commands directory (primary location)
+    if [ -d "$CLAUDE_COMMANDS_DIR" ]; then
         local count=0
-        for agent_file in "$CLAUDE_AGENTS_DIR"/*.md; do
+        for agent_file in "$CLAUDE_COMMANDS_DIR"/*.md; do
             if [ -f "$agent_file" ]; then
                 local agent_name=$(basename "$agent_file" .md)
                 # Try to extract description from file
@@ -301,7 +318,7 @@ list_installed_agents() {
                 if [ -z "$description" ]; then
                     description="Custom agent"
                 fi
-                echo -e "  ${GREEN}●${NC} @${agent_name}"
+                echo -e "  ${GREEN}●${NC} /${agent_name}"
                 echo -e "    └─ ${description:0:60}..."
                 count=$((count + 1))
             fi
@@ -311,10 +328,11 @@ list_installed_agents() {
             print_warning "No agents installed"
         else
             echo ""
-            print_success "Total: $count agents"
+            print_success "Total: $count slash commands available"
+            print_info "Location: $CLAUDE_COMMANDS_DIR"
         fi
     else
-        print_error "Agents directory does not exist"
+        print_error "Commands directory does not exist"
     fi
 }
 
@@ -370,19 +388,24 @@ show_usage() {
     echo ""
     print_header "How to use Claude Code Agents:"
     echo ""
-    echo "1. Basic usage with @ mention:"
-    echo -e "   ${CYAN}@agent-name${NC} your request here"
+    echo "1. Using slash commands (NEW!):"
+    echo -e "   ${CYAN}/orchestrate${NC} Create a REST API with authentication"
+    echo -e "   ${CYAN}/backend-developer${NC} implement user service"
+    echo -e "   ${CYAN}/frontend-developer${NC} create dashboard component"
     echo ""
-    echo "2. Team coordination (generic agents):"
-    echo -e "   ${CYAN}@context-manager${NC} initialize our new project"
+    echo "2. Team coordination with slash commands:"
+    echo -e "   ${CYAN}/context-manager${NC} initialize our new project"
+    echo -e "   ${CYAN}/solution-architect${NC} design microservices architecture"
     echo ""
     echo "3. Specialized agents examples:"
-    echo -e "   ${CYAN}@react-specialist${NC} optimize our React components"
-    echo -e "   ${CYAN}@ml-engineer${NC} implement a recommendation system"
-    echo -e "   ${CYAN}@game-developer${NC} create a 2D physics engine"
+    echo -e "   ${CYAN}/react-specialist${NC} optimize our React components"
+    echo -e "   ${CYAN}/ml-engineer${NC} implement a recommendation system"
+    echo -e "   ${CYAN}/game-developer${NC} create a 2D physics engine"
     echo ""
     echo "4. Creating custom agents:"
     echo "   Run: $0 --create"
+    echo ""
+    print_info "Agents are installed as slash commands in: $CLAUDE_COMMANDS_DIR"
     echo ""
 }
 

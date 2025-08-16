@@ -20,8 +20,10 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 AGENTS_SOURCE_DIR="${SCRIPT_DIR}/agents"
 LOCAL_CLAUDE_DIR="${SCRIPT_DIR}/.claude"
 LOCAL_AGENTS_DIR="${LOCAL_CLAUDE_DIR}/agents"
+LOCAL_COMMANDS_DIR="${LOCAL_CLAUDE_DIR}/commands"
 CLAUDE_CONFIG_DIR="$HOME/.config/claude"
 CLAUDE_AGENTS_DIR="${CLAUDE_CONFIG_DIR}/agents"
+CLAUDE_COMMANDS_DIR="$HOME/.claude/commands"
 
 # Agent Categories with descriptions
 declare -A CATEGORIES=(
@@ -154,8 +156,9 @@ setup_local_claude() {
     
     # Create .claude directory structure
     mkdir -p "$LOCAL_AGENTS_DIR"
+    mkdir -p "$LOCAL_COMMANDS_DIR"
     
-    # Copy agents to local directory
+    # Copy agents to local directory AND commands directory
     local copied=0
     local updated=0
     
@@ -165,15 +168,18 @@ setup_local_claude() {
                 if [ -f "$agent_file" ]; then
                     local agent_name=$(basename "$agent_file")
                     local target_file="$LOCAL_AGENTS_DIR/$agent_name"
+                    local command_file="$LOCAL_COMMANDS_DIR/$agent_name"
                     
                     if [ $backup_result -eq 1 ] && [ -f "$target_file" ]; then
                         # Merge mode: only copy if newer or doesn't exist
                         if [ "$agent_file" -nt "$target_file" ]; then
                             cp "$agent_file" "$target_file"
+                            cp "$agent_file" "$command_file"
                             updated=$((updated + 1))
                         fi
                     else
                         cp "$agent_file" "$target_file"
+                        cp "$agent_file" "$command_file"
                         copied=$((copied + 1))
                     fi
                 fi
@@ -263,10 +269,43 @@ EOF
 install_orchestrator() {
     print_info "Installing orchestrator components..."
     
-    # Install slash_commands.json if it exists
+    # Create orchestrator as a slash command
+    if [ -f "${SCRIPT_DIR}/agents/orchestrator.md" ]; then
+        cp "${SCRIPT_DIR}/agents/orchestrator.md" "${LOCAL_COMMANDS_DIR}/orchestrate.md"
+        print_success "Installed /orchestrate command"
+    elif [ -f "${SCRIPT_DIR}/.claude/orchestrator.md" ]; then
+        cp "${SCRIPT_DIR}/.claude/orchestrator.md" "${LOCAL_COMMANDS_DIR}/orchestrate.md"
+        print_success "Installed /orchestrate command"
+    else
+        # Create a basic orchestrator command file
+        cat > "${LOCAL_COMMANDS_DIR}/orchestrate.md" << 'EOF'
+---
+description: Orchestrate multiple agents to complete complex tasks
+argument-hint: task description
+allowed-tools: Task
+---
+
+You are the Intelligent Orchestrator for Claude Code. Analyze the task: $ARGUMENTS
+
+Select and coordinate the appropriate agents:
+- context-manager: Project analysis and coordination
+- solution-architect: System design and architecture
+- backend-developer: Server-side and API development
+- frontend-developer: UI/UX and client-side development
+- devops-engineer: Infrastructure and deployment
+- quality-engineer: Testing and quality assurance
+- security-engineer: Security assessment and implementation
+- documentation-manager: Documentation and guides
+
+Use the Task tool with the appropriate subagent_type to delegate work.
+EOF
+        print_success "Created /orchestrate command"
+    fi
+    
+    # Install slash_commands.json if it exists (for backward compatibility)
     if [ -f "${SCRIPT_DIR}/.claude/slash_commands.json" ]; then
         cp "${SCRIPT_DIR}/.claude/slash_commands.json" "${LOCAL_CLAUDE_DIR}/"
-        print_success "Installed slash_commands.json for /orchestrate command"
+        print_info "Installed legacy slash_commands.json"
     fi
     
     # Install agent-intelligence.json if it exists
@@ -401,20 +440,23 @@ setup_system_claude() {
     
     print_header "Setting up system-wide Claude configuration..."
     
-    # Create Claude config directory
+    # Create Claude directories (both old location for compatibility and new for commands)
     mkdir -p "$CLAUDE_AGENTS_DIR"
+    mkdir -p "$CLAUDE_COMMANDS_DIR"
     
-    # Copy agents to system directory
+    # Copy agents to both system directories
     local copied=0
     for agent_file in "$LOCAL_AGENTS_DIR"/*.md; do
         if [ -f "$agent_file" ]; then
             cp "$agent_file" "$CLAUDE_AGENTS_DIR/"
+            cp "$agent_file" "$CLAUDE_COMMANDS_DIR/"
             copied=$((copied + 1))
         fi
     done
     
     if [ $copied -gt 0 ]; then
-        print_success "Copied $copied agents to $CLAUDE_AGENTS_DIR"
+        print_success "Copied $copied agents to Claude commands directory"
+        print_info "Agents installed as slash commands in: $CLAUDE_COMMANDS_DIR"
     fi
 }
 
@@ -561,6 +603,14 @@ verify_setup() {
         issues=$((issues + 1))
     fi
     
+    # Check commands directory
+    local command_count=$(find "$LOCAL_COMMANDS_DIR" -name "*.md" -type f 2>/dev/null | wc -l)
+    if [ $command_count -gt 0 ]; then
+        print_success "Found $command_count slash commands"
+    else
+        print_warning "No slash commands found"
+    fi
+    
     # Check registry
     if [ -f "${LOCAL_CLAUDE_DIR}/agent-registry.json" ]; then
         print_success "Agent registry exists"
@@ -585,9 +635,10 @@ show_next_steps() {
     echo ""
     echo "1. The agents are now available in your project's .claude/ directory"
     echo ""
-    echo "2. ${GREEN}NEW: Use the /orchestrate command for automatic agent selection:${NC}"
+    echo "2. ${GREEN}Use slash commands for direct agent access:${NC}"
     echo "   ${CYAN}/orchestrate Create a login system${NC}"
-    echo "   ${CYAN}/orchestrate Optimize database performance${NC}"
+    echo "   ${CYAN}/backend-developer implement user service${NC}"
+    echo "   ${CYAN}/frontend-developer create login component${NC}"
     echo ""
     echo "3. ${GREEN}NEW: Memory System installed - Agents learn from experience!${NC}"
     echo "   - Orchestrator remembers successful patterns"
@@ -605,9 +656,12 @@ show_next_steps() {
     echo "   • Recovery: Automatic error handling & rollback"
     echo "   • Health: Proactive monitoring with auto-remediation"
     echo ""
-    echo "6. Or use agents directly via the Task tool:"
-    echo "   - Set subagent_type to any available agent"
-    echo "   - Example: subagent_type='context-manager'"
+    echo "6. Available slash commands in .claude/commands/:"
+    echo "   - /orchestrate - Automatic agent coordination"
+    echo "   - /backend-developer - Server development"
+    echo "   - /frontend-developer - UI development"
+    echo "   - /devops-engineer - Infrastructure"
+    echo "   - And more agents as commands!"
     echo ""
     echo "7. View documentation:"
     echo "   - ${CYAN}cat .claude/CLAUDE.md${NC} - Main configuration"
@@ -615,7 +669,11 @@ show_next_steps() {
     echo "   - ${CYAN}cat .claude/USAGE.md${NC} - Usage instructions"
     echo "   - ${CYAN}cat .claude/PHASE1-COMPLETE.md${NC} - Performance features"
     echo ""
-    echo "8. The orchestrator will automatically:"
+    echo "8. Commands work in two modes:"
+    echo "   - Project-level: .claude/commands/ (this project only)"
+    echo "   - Global: ~/.claude/commands/ (all projects)"
+    echo ""
+    echo "9. The orchestrator will automatically:"
     echo "   - Analyze task complexity"
     echo "   - Select appropriate agents"
     echo "   - Coordinate team collaboration"
