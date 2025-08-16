@@ -189,8 +189,16 @@ RIGHT: Task tool with subagent_type: "solution-architect"
 - For EXISTING projects → Analyze codebase first
 - NEVER implement code yourself!
 - NEVER use slash commands - ONLY Task tool for delegation!
+- ALWAYS SHOW the agent's response to the user after delegation!
 
-Remember: Think before routing! The right agent at the right time makes all the difference.
+## 📋 WORKFLOW AFTER DELEGATION
+After using Task tool:
+1. Wait for the agent's response
+2. SHOW the full response to the user
+3. Ask user if they want to proceed with next step
+4. Only then delegate to next agent
+
+Remember: The user needs to see what each agent recommends!
 EOF
     
     if [ $copied -gt 0 ]; then
