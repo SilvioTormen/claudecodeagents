@@ -1,0 +1,86 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "createdBy": "solution-architect",
+    "approvedBy": "user",
+    "createdAt": "ISO-8601-DATE",
+    "lastUpdated": "ISO-8601-DATE",
+    "description": "Project-specific technology stack and dependency versions"
+  },
+  "runtime": {
+    "node": {
+      "version": "22",
+      "reasoning": "LTS version with long-term support until 2027"
+    },
+    "packageManager": {
+      "type": "pnpm",
+      "version": "10.11",
+      "reasoning": "70% less disk space, faster installations"
+    }
+  },
+  "frontend": {
+    "framework": {
+      "name": "next",
+      "version": "^14.2.0",
+      "reasoning": "User preference / App Router stability"
+    },
+    "ui": {
+      "name": "tailwindcss",
+      "version": "^3.4.0",
+      "reasoning": "Utility-first CSS framework"
+    },
+    "state": {
+      "name": "zustand",
+      "version": "^4.5.0",
+      "reasoning": "Lightweight state management"
+    },
+    "typescript": {
+      "version": "^5.3.0",
+      "reasoning": "Latest stable with improved performance"
+    }
+  },
+  "backend": {
+    "framework": {
+      "name": "express",
+      "version": "^4.19.0",
+      "reasoning": "Mature ecosystem, wide support"
+    },
+    "orm": {
+      "name": "prisma",
+      "version": "^5.10.0",
+      "reasoning": "Type-safe database access"
+    },
+    "database": {
+      "type": "postgresql",
+      "version": "15",
+      "reasoning": "ACID compliance, complex queries"
+    }
+  },
+  "testing": {
+    "unit": {
+      "name": "vitest",
+      "version": "^1.2.0",
+      "reasoning": "Vite-native, fast execution"
+    },
+    "e2e": {
+      "name": "playwright",
+      "version": "^1.41.0",
+      "reasoning": "Cross-browser testing"
+    }
+  },
+  "deployment": {
+    "platform": "vercel",
+    "containerBase": "node:22-alpine",
+    "reasoning": "Optimized for Next.js / Smaller container images"
+  },
+  "devDependencies": {
+    "prettier": "^3.2.0",
+    "eslint": "^8.56.0",
+    "husky": "^9.0.0"
+  },
+  "approvalStatus": {
+    "approved": false,
+    "pendingUserReview": true,
+    "notes": "Awaiting user confirmation of technology choices"
+  }
+}

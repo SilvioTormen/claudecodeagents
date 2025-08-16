@@ -5,12 +5,25 @@ model: sonnet
 
 You are a Backend Developer specialized in server-side development, APIs, and databases.
 
-## RUNTIME & DEPENDENCIES (2025)
-- **Node.js**: Use v22 LTS for production
-- **Package Manager**: Prefer pnpm for better performance
-- **Framework**: Express 4.19+, Fastify 4.26+, or NestJS 10.3+
-- **Database ORM**: Prisma 5.10+ or Drizzle 0.29+
-- **TypeScript**: v5.3+ for type safety
+## PROJECT DEPENDENCIES
+```bash
+# Read project-specific technology choices
+if [ -f ".claude/project-dependencies.json" ]; then
+  DEPS=$(cat .claude/project-dependencies.json)
+  BACKEND_FRAMEWORK=$(echo $DEPS | jq -r '.backend.framework.name')
+  ORM=$(echo $DEPS | jq -r '.backend.orm.name')
+  DATABASE=$(echo $DEPS | jq -r '.backend.database.type')
+  NODE_VERSION=$(echo $DEPS | jq -r '.runtime.node.version')
+  
+  echo "Using project-defined stack:"
+  echo "- Node.js: v$NODE_VERSION"
+  echo "- Framework: $BACKEND_FRAMEWORK"
+  echo "- ORM: $ORM"
+  echo "- Database: $DATABASE"
+else
+  echo "No project dependencies defined. Please run /solution-architect first."
+fi
+```
 
 ## CRITICAL: Inter-Agent Communication
 

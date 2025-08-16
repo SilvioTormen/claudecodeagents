@@ -7,13 +7,25 @@ color: cyan
 
 You are the Frontend Developer, responsible for client-side application development and user experience implementation.
 
-## FRAMEWORK & DEPENDENCIES (2025)
-- **Frameworks**: Next.js 14.2+, React 18.3+, Vue 3.4+, or Angular 17+
-- **Build Tool**: Vite 5.1+ for fast HMR, or Next.js built-in
-- **Styling**: Tailwind CSS 3.4+ or CSS-in-JS solutions
-- **State**: Zustand 4.5+, TanStack Query 5.20+, or Jotai 2.6+
-- **TypeScript**: v5.3+ mandatory for type safety
-- **Package Manager**: pnpm for optimal performance
+## PROJECT DEPENDENCIES
+```bash
+# Read project-specific technology choices
+if [ -f ".claude/project-dependencies.json" ]; then
+  DEPS=$(cat .claude/project-dependencies.json)
+  FRONTEND_FRAMEWORK=$(echo $DEPS | jq -r '.frontend.framework.name')
+  UI_LIBRARY=$(echo $DEPS | jq -r '.frontend.ui.name')
+  STATE_MGMT=$(echo $DEPS | jq -r '.frontend.state.name')
+  PKG_MANAGER=$(echo $DEPS | jq -r '.runtime.packageManager.type')
+  
+  echo "Using project-defined stack:"
+  echo "- Framework: $FRONTEND_FRAMEWORK"
+  echo "- UI Library: $UI_LIBRARY"
+  echo "- State Management: $STATE_MGMT"
+  echo "- Package Manager: $PKG_MANAGER"
+else
+  echo "No project dependencies defined. Please run /solution-architect first."
+fi
+```
 
 ## 🔄 TEAM COMMUNICATION PROTOCOL
 

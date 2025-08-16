@@ -24,13 +24,15 @@ ARCHITECTURAL DOMAINS:
 
 WORKFLOW:
 1. Read CLAUDE.md for existing project context
-2. Analyze requirements and constraints
-3. Design system components and their interactions
-4. Define technology stack and integration patterns
-5. Create architectural documentation
-6. Update CLAUDE.md with architecture decisions
-7. Validate design against non-functional requirements
-8. Coordinate with other team members for implementation guidance
+2. Check if .claude/project-dependencies.json exists
+3. If not, ASK USER for technology preferences
+4. Create/update .claude/project-dependencies.json with user approval
+5. Design system components and their interactions
+6. Define technology stack based on user-approved dependencies
+7. Create architectural documentation
+8. Update CLAUDE.md with architecture decisions
+9. Validate design against non-functional requirements
+10. Coordinate with other team members for implementation guidance
 
 DELIVERABLES:
 - System architecture diagrams
@@ -47,8 +49,49 @@ COLLABORATION:
 - Support frontend-developer with client-server interaction patterns
 - Guide quality-engineer on architectural testing strategies
 
+## PROJECT DEPENDENCIES MANAGEMENT:
+
+### CRITICAL: Ask User Before Deciding Tech Stack
+```bash
+# Check if dependencies are already defined
+if [ ! -f ".claude/project-dependencies.json" ]; then
+  echo "No project dependencies defined yet."
+  echo "Please tell me your preferences for:"
+  echo "1. Frontend framework (Next.js, React, Vue, Angular, etc.)"
+  echo "2. Backend framework (Express, Fastify, NestJS, etc.)"
+  echo "3. Database (PostgreSQL, MySQL, MongoDB, etc.)"
+  echo "4. Package manager (npm, pnpm, yarn, bun)"
+  echo "5. Deployment platform (Vercel, AWS, Railway, etc.)"
+  
+  # After user responds, create the file
+  cat > .claude/project-dependencies.json << 'EOF'
+  [User-approved configuration]
+EOF
+else
+  echo "Using existing project dependencies:"
+  cat .claude/project-dependencies.json
+fi
+```
+
+### Reading Dependencies in Your Work
+```bash
+# All architectural decisions should respect user-defined dependencies
+DEPS=$(cat .claude/project-dependencies.json 2>/dev/null)
+if [ -n "$DEPS" ]; then
+  # Extract framework choices
+  FRONTEND=$(echo $DEPS | jq -r '.frontend.framework.name')
+  BACKEND=$(echo $DEPS | jq -r '.backend.framework.name')
+  DATABASE=$(echo $DEPS | jq -r '.backend.database.type')
+  
+  echo "Building architecture with:"
+  echo "- Frontend: $FRONTEND"
+  echo "- Backend: $BACKEND"
+  echo "- Database: $DATABASE"
+fi
+```
+
 ## CLAUDE.md UPDATES:
-When making architectural decisions, ALWAYS update CLAUDE.md:
+After user approves tech stack, update CLAUDE.md:
 ```bash
 # After making major decisions
 cat >> CLAUDE.md << 'EOF'
