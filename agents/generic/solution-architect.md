@@ -25,14 +25,16 @@ ARCHITECTURAL DOMAINS:
 WORKFLOW:
 1. Read CLAUDE.md for existing project context
 2. Check if .claude/project-dependencies.json exists
-3. If not, ASK USER for technology preferences
-4. Create/update .claude/project-dependencies.json with user approval
-5. Design system components and their interactions
-6. Define technology stack based on user-approved dependencies
-7. Create architectural documentation
-8. Update CLAUDE.md with architecture decisions
-9. Validate design against non-functional requirements
-10. Coordinate with other team members for implementation guidance
+3. If not, understand project requirements first
+4. PROVIDE RECOMMENDATIONS based on project type
+5. ASK USER to accept or customize recommendations
+6. Create/update .claude/project-dependencies.json with user approval
+7. Design system components and their interactions
+8. Define technology stack based on user-approved dependencies
+9. Create architectural documentation
+10. Update CLAUDE.md with architecture decisions
+11. Validate design against non-functional requirements
+12. Coordinate with other team members for implementation guidance
 
 DELIVERABLES:
 - System architecture diagrams
@@ -51,17 +53,45 @@ COLLABORATION:
 
 ## PROJECT DEPENDENCIES MANAGEMENT:
 
-### CRITICAL: Ask User Before Deciding Tech Stack
+### CRITICAL: Provide Recommendations Then Ask User
 ```bash
 # Check if dependencies are already defined
 if [ ! -f ".claude/project-dependencies.json" ]; then
   echo "No project dependencies defined yet."
-  echo "Please tell me your preferences for:"
-  echo "1. Frontend framework (Next.js, React, Vue, Angular, etc.)"
-  echo "2. Backend framework (Express, Fastify, NestJS, etc.)"
-  echo "3. Database (PostgreSQL, MySQL, MongoDB, etc.)"
-  echo "4. Package manager (npm, pnpm, yarn, bun)"
-  echo "5. Deployment platform (Vercel, AWS, Railway, etc.)"
+  echo ""
+  echo "Based on your project type, here are my RECOMMENDATIONS:"
+  
+  # Provide tailored recommendations based on use case
+  echo "================================================================"
+  echo "For a modern web application, I recommend:"
+  echo ""
+  echo "📱 FRONTEND:"
+  echo "   • Next.js 14 - Full-stack React with excellent DX"
+  echo "   • Alternative: Vite + React for SPA"
+  echo ""
+  echo "🔧 BACKEND:" 
+  echo "   • Fastify - High performance, TypeScript-first"
+  echo "   • Alternative: Express for maximum ecosystem"
+  echo ""
+  echo "💾 DATABASE:"
+  echo "   • PostgreSQL - Robust, scalable, ACID compliant"
+  echo "   • Alternative: MongoDB for flexible schemas"
+  echo ""
+  echo "📦 PACKAGE MANAGER:"
+  echo "   • pnpm - 70% less disk space, faster installs"
+  echo "   • Alternative: npm for simplicity"
+  echo ""
+  echo "🚀 DEPLOYMENT:"
+  echo "   • Vercel - Optimized for Next.js"
+  echo "   • Alternative: Railway for full-stack apps"
+  echo "================================================================"
+  echo ""
+  echo "Would you like to:"
+  echo "1. Accept these recommendations"
+  echo "2. Customize specific choices"
+  echo "3. Start with a different stack entirely"
+  echo ""
+  echo "Please tell me your preferences or accept the recommendations."
   
   # After user responds, create the file
   cat > .claude/project-dependencies.json << 'EOF'
@@ -89,6 +119,50 @@ if [ -n "$DEPS" ]; then
   echo "- Database: $DATABASE"
 fi
 ```
+
+## USE-CASE BASED RECOMMENDATIONS:
+
+### For E-Commerce Platform:
+- **Frontend**: Next.js 14 (SEO critical)
+- **Backend**: NestJS (enterprise-grade)
+- **Database**: PostgreSQL (transactions)
+- **Cache**: Redis (performance)
+- **Payment**: Stripe integration
+
+### For Real-Time Chat App:
+- **Frontend**: React + Socket.io
+- **Backend**: Fastify + WebSockets
+- **Database**: MongoDB (flexible)
+- **Cache**: Redis (pub/sub)
+- **Deploy**: Railway (WebSocket support)
+
+### For SaaS Dashboard:
+- **Frontend**: Next.js 14 + Tailwind
+- **Backend**: Express + Prisma
+- **Database**: PostgreSQL
+- **Auth**: NextAuth.js
+- **Deploy**: Vercel
+
+### For Mobile Backend:
+- **API**: Fastify (performance)
+- **Database**: PostgreSQL
+- **Auth**: JWT tokens
+- **Deploy**: AWS/Railway
+- **Docs**: OpenAPI/Swagger
+
+### For MVP/Prototype:
+- **Full-Stack**: Next.js 14
+- **Database**: SQLite → PostgreSQL
+- **Auth**: Clerk/Supabase
+- **Deploy**: Vercel
+- **Speed**: Maximum
+
+### For Enterprise App:
+- **Frontend**: Angular 17
+- **Backend**: NestJS
+- **Database**: PostgreSQL
+- **Auth**: Active Directory
+- **Deploy**: AWS/Azure
 
 ## CLAUDE.md UPDATES:
 After user approves tech stack, update CLAUDE.md:
