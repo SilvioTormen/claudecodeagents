@@ -346,7 +346,13 @@ install_performance_features() {
     fi
     
     # Install Interactive CLI
-    if [ -f "${SCRIPT_DIR}/.claude/cli/interactive-cli.js" ]; then
+    if [ -f "${SCRIPT_DIR}/cli/interactive-cli.js" ]; then
+        cp "${SCRIPT_DIR}/cli/interactive-cli.js" "${LOCAL_CLAUDE_DIR}/cli/"
+        cp "${SCRIPT_DIR}/cli/package.json" "${LOCAL_CLAUDE_DIR}/cli/" 2>/dev/null || true
+        cp "${SCRIPT_DIR}/cli/README.md" "${LOCAL_CLAUDE_DIR}/cli/" 2>/dev/null || true
+        print_success "Installed Interactive CLI System"
+    elif [ -f "${SCRIPT_DIR}/.claude/cli/interactive-cli.js" ]; then
+        # Fallback to .claude/cli if it exists (for backward compatibility)
         cp "${SCRIPT_DIR}/.claude/cli/interactive-cli.js" "${LOCAL_CLAUDE_DIR}/cli/"
         cp "${SCRIPT_DIR}/.claude/cli/package.json" "${LOCAL_CLAUDE_DIR}/cli/" 2>/dev/null || true
         cp "${SCRIPT_DIR}/.claude/cli/README.md" "${LOCAL_CLAUDE_DIR}/cli/" 2>/dev/null || true
