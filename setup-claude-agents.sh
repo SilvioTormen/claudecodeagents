@@ -68,13 +68,20 @@ install_agents() {
     # Create directory if it doesn't exist
     mkdir -p "$install_location"
     
-    # Copy all agent files
+    # Copy only proper agent files (excluding old versions and README)
     local copied=0
     if [ -d "$AGENTS_SOURCE_DIR/generic" ]; then
         for agent_file in "$AGENTS_SOURCE_DIR/generic"/*.md; do
             if [ -f "$agent_file" ]; then
-                cp "$agent_file" "$install_location/"
-                copied=$((copied + 1))
+                local filename=$(basename "$agent_file")
+                # Skip old versions, README, and other non-agent files
+                if [[ "$filename" != *"-old.md" ]] && \
+                   [[ "$filename" != "README.md" ]] && \
+                   [[ "$filename" != "TEAM-COMMUNICATION-PROTOCOL.md" ]] && \
+                   [[ "$filename" != "create-github-token.md" ]]; then
+                    cp "$agent_file" "$install_location/"
+                    copied=$((copied + 1))
+                fi
             fi
         done
     fi
