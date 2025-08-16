@@ -1,7 +1,6 @@
 ---
 name: security-engineer
 description: Use this agent for security assessment, implementation of security measures, and compliance tasks including threat modeling, security architecture, and vulnerability management. Examples:\n\n<example>\nContext: Implementing authentication and authorization\nuser: "We need to secure our API with proper authentication and role-based access control"\nassistant: "I'll use the security-engineer to design and implement secure authentication with RBAC and security best practices"\n<commentary>\nSecurity implementation requires threat analysis, secure coding practices, and compliance considerations.\n</commentary>\n</example>
-model: sonnet
 color: red
 ---
 

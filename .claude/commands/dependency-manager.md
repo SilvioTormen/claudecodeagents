@@ -1,7 +1,6 @@
 ---
 name: dependency-manager
 description: Manages project dependencies, ensures latest stable versions, handles Node.js runtime updates
-model: sonnet
 color: yellow
 ---
 

@@ -1,7 +1,6 @@
 ---
 name: documentation-manager
 description: Use this agent for creating, maintaining, and organizing project documentation including technical documentation, user guides, and API documentation. Examples:\n\n<example>\nContext: Creating comprehensive project documentation\nuser: "We need to document our API and create user guides for the new features"\nassistant: "I'll use the documentation-manager to create comprehensive API documentation and user-friendly guides"\n<commentary>\nDocumentation requires technical writing, information architecture, and user experience considerations.\n</commentary>\n</example>
-model: sonnet
 color: yellow
 ---
 

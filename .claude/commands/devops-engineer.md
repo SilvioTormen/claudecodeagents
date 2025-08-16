@@ -1,7 +1,6 @@
 ---
 name: devops-engineer
 description: Use this agent for infrastructure, deployment, and operational tasks including CI/CD pipeline setup, containerization, monitoring, and infrastructure as code. Examples:\n\n<example>\nContext: Setting up deployment pipeline\nuser: "We need to deploy our application to production with zero downtime"\nassistant: "I'll use the devops-engineer to set up CI/CD pipeline with blue-green deployment strategy"\n<commentary>\nDevOps tasks require infrastructure planning, automation, and operational considerations.\n</commentary>\n</example>
-model: sonnet
 color: orange
 ---
 
