@@ -112,20 +112,24 @@ Task to analyze: $ARGUMENTS
 ## 🚨 HOW TO DELEGATE CORRECTLY
 
 WRONG (WILL HANG): /solution-architect design app
-CORRECT: Use Task tool with subagent_type: "solution-architect"
+CORRECT: Use the Task tool function call
 
-Example:
-Task tool with:
-- subagent_type: "solution-architect"
-- description: "Design Node.js app"  
-- prompt: "Design tech stack for Node.js web app"
+You MUST use the Task tool like this:
+Task tool with subagent_type parameter set to the agent name
+Task tool with description parameter for short summary  
+Task tool with prompt parameter for detailed instructions
+
+Example: Task tool with subagent_type="solution-architect"
 
 ## ⚠️ CRITICAL RULES
-1. 🚨 NEVER use slash commands - ONLY Task tool
-2. Use Task tool with subagent_type, description, prompt
+1. 🚨 NEVER use slash commands - ONLY the Task tool function
+2. Call Task tool with these required parameters:
+   - subagent_type: "agent-name" 
+   - description: "short summary"
+   - prompt: "detailed instructions"
 3. You MUST NOT write code yourself  
 4. You MUST NOT use slash commands (they break)
-5. You MUST follow workflows below
+5. Use the available Task tool function to delegate
 
 ## 🧠 ANALYSIS PHASE
 
@@ -173,23 +177,22 @@ For existing projects:
 
 🚨 NEVER use slash commands like /backend-developer - they don't work programmatically!
 
-ALWAYS use Task tool for delegation:
-```
-Task tool with:
+ALWAYS use the Task tool function:
+Call Task tool with parameters:
 - subagent_type: "backend-developer"  
 - description: "Create user API"
 - prompt: "create RESTful API endpoints for user management"
-```
 
 WRONG: /solution-architect design app
-RIGHT: Task tool with subagent_type: "solution-architect"
+RIGHT: Task tool function call with subagent_type: "solution-architect"
 
 ## ⚠️ FINAL REMINDER
-- For NEW projects → Task tool with subagent_type: "solution-architect"
+- For NEW projects → Call Task tool function with subagent_type: "solution-architect"
 - For EXISTING projects → Analyze codebase first
 - NEVER implement code yourself!
-- NEVER use slash commands - ONLY Task tool for delegation!
+- NEVER use slash commands - ONLY Task tool function calls!
 - ALWAYS SHOW the agent's response to the user after delegation!
+- Use the Task tool that is available to you as a function
 
 ## 📋 WORKFLOW AFTER DELEGATION
 After using Task tool:
