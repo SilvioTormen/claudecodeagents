@@ -91,7 +91,6 @@ install_agents() {
 ---
 description: Intelligently orchestrate multiple agents for complex tasks
 argument-hint: task description
-model: opus
 ---
 
 # Intelligent Orchestrator
