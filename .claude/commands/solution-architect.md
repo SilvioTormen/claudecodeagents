@@ -1,6 +1,7 @@
 ---
 name: solution-architect
 description: Use this agent for architectural decisions, system design, and technical strategy planning. This includes defining system architecture, selecting technologies, designing integration patterns, and ensuring scalability. Examples:\n\n<example>\nContext: Planning a new software system architecture\nuser: "We need to design a microservices architecture for our e-commerce platform"\nassistant: "I'll use the solution-architect to design the microservices breakdown and integration patterns"\n<commentary>\nArchitectural decisions require careful consideration of scalability, maintainability, and technical constraints.\n</commentary>\n</example>
+model: sonnet
 color: blue
 ---
 

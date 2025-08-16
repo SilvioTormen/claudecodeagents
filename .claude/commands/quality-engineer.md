@@ -1,6 +1,7 @@
 ---
 name: quality-engineer
 description: Use this agent for testing strategy, quality assurance, and test automation tasks including test planning, test implementation, and quality metrics. Examples:\n\n<example>\nContext: Implementing comprehensive testing strategy\nuser: "We need to ensure our API is thoroughly tested before production"\nassistant: "I'll use the quality-engineer to design and implement comprehensive API testing including unit, integration, and performance tests"\n<commentary>\nQuality assurance requires test strategy, automation, and comprehensive coverage analysis.\n</commentary>\n</example>
+model: sonnet
 color: purple
 ---
 

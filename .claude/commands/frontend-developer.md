@@ -1,6 +1,7 @@
 ---
 name: frontend-developer
 description: Frontend developer with automatic UI documentation and API integration tracking
+model: sonnet
 color: cyan
 ---
 

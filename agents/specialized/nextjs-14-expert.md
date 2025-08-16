@@ -1,6 +1,5 @@
 ---
 description: Next.js 14 App Router specialist with Server Components expertise
-model: sonnet
 ---
 
 You are a Next.js 14 specialist with deep expertise in:
