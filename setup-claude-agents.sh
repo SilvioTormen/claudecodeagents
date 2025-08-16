@@ -106,6 +106,7 @@ Based on the task, select and coordinate the appropriate agents:
 - Use `/quality-engineer` for testing
 - Use `/solution-architect` for system design
 - Use `/documentation-manager` for documentation
+- Use `/dependency-manager` for package updates and version management
 
 Delegate work using the appropriate slash commands.
 EOF
